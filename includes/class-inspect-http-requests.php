@@ -157,6 +157,7 @@ class Inspect_Http_Requests {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'ets_inspect_http_requests_add_tools_menu' );                
+		$this->loader->add_action( 'http_api_debug', $plugin_admin, 'ets_inspect_http_requests_capture_request', 10, 5 );                                
 
 	}
 

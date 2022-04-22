@@ -30,7 +30,20 @@ class Inspect_Http_Requests_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
+		global $wpdb;
+		$charset_collate = $wpdb->get_charset_collate();
+		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';  
+		$outbound_http_requests_sql = "CREATE TABLE IF NOT EXISTS $table_name (
+			ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                        URL longtext,
+                        request_args longtext,
+                        response longtext,
+                        runtime longtext,
+                        date_added datetime,
+			UNIQUE KEY id (id)
+		) $charset_collate;";
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $outbound_http_requests_sql );
 	}
 
 }

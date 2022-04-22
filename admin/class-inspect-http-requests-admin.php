@@ -115,13 +115,18 @@ class Inspect_Http_Requests_Admin {
 	 *
 	 * @since    1.0.0
 	 */        
-        public function ets_inspect_http_requests_tools_page() {
+	public function ets_inspect_http_requests_tools_page() {
 		if ( ! current_user_can( 'administrator' ) ) {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
 		}                            
-                wp_enqueue_style( $this->plugin_name );                               
-                wp_enqueue_script($this->plugin_name);              
-                require_once INSPECT_HTTP_REQUESTS_PLUGIN_DIR_PATH . 'admin/partials/inspect-http-requests-admin-display.php';           
+		wp_enqueue_style( $this->plugin_name );                               
+		wp_enqueue_script($this->plugin_name);              
+		require_once INSPECT_HTTP_REQUESTS_PLUGIN_DIR_PATH . 'admin/partials/inspect-http-requests-admin-display.php';           
         }
+
+	public function ets_inspect_http_requests_capture_request($response, $context, $transport, $args, $url ) {
+            
+            //
+	}
 }        
