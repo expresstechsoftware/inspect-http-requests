@@ -38,6 +38,11 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'INSPECT_HTTP_REQUESTS_VERSION', '1.0.0' );
 
 /**
+ * Define plugin directory path
+ */
+define( 'INSPECT_HTTP_REQUESTS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-inspect-http-requests-activator.php
  */
