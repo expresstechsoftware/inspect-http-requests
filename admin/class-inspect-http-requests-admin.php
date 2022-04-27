@@ -125,8 +125,26 @@ class Inspect_Http_Requests_Admin {
 		require_once INSPECT_HTTP_REQUESTS_PLUGIN_DIR_PATH . 'admin/partials/inspect-http-requests-admin-display.php';           
         }
 
-	public function ets_inspect_http_requests_capture_request($response, $context, $transport, $args, $url ) {
-            
-            //
+	/**
+	 * Capture the request and save it inside the DB table.
+	 *
+	 * @since    1.0.0
+         * 
+         * @param type $response
+	 */	
+	public function ets_inspect_http_requests_capture_request( $response, $context, $transport, $args, $url ) {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
+                
+		$http_api_call_data = array(
+			'URL' => sanitize_url ( $url ),
+			'request_args' => json_encode( $args ),
+			'response' => json_encode( $response ),
+			'runtime' => '',
+			'date_added' => date('Y-m-d H:i:s')
+			);
+		if( ! $wpdb->insert( $table_name, $http_api_call_data ) ){    
+			$wpdb->print_error();
+		}                
 	}
 }        
