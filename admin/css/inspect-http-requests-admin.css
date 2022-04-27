@@ -2,3 +2,62 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+div.ets-inspect-http-requests label.ets-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+div.ets-inspect-http-requests label.ets-switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+div.ets-inspect-http-requests label.ets-switch span.ets-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+div.ets-inspect-http-requests label.ets-switch span.ets-slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+div.ets-inspect-http-requests input:checked + span.ets-slider {
+  background-color: #2196F3;
+}
+
+div.ets-inspect-http-requests input:focus + span.ets-slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+div.ets-inspect-http-requests input:checked + span.ets-slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+
+span.ets-slider.round {
+  border-radius: 34px;
+}
+
+span.ets-slider.round:before {
+  border-radius: 50%;
+}

@@ -73,7 +73,7 @@ class Inspect_Http_Requests_Admin {
 		 * class.
 		 */
 
-		wp_register_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/inspect-http-requests-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/inspect-http-requests-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,7 +96,7 @@ class Inspect_Http_Requests_Admin {
 		 * class.
 		 */
 
-		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/inspect-http-requests-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/inspect-http-requests-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -106,7 +106,7 @@ class Inspect_Http_Requests_Admin {
 	 * @since    1.0.0
 	 */        
 	public function ets_inspect_http_requests_add_tools_menu() {
-            add_submenu_page ( 'tools.php' ,  __( 'Inspect HTTP Request', 'inspect-http-requests' ) , __( 'Inspect HTTP Request', 'inspect-http-requests' ), 'manage_options', 'inspect-http-requests', array( $this, 'ets_inspect_http_requests_tools_page' ) );
+		add_submenu_page ( 'tools.php' ,  __( 'Inspect HTTP Request', 'inspect-http-requests' ) , __( 'Inspect HTTP Request', 'inspect-http-requests' ), 'manage_options', 'inspect-http-requests', array( $this, 'ets_inspect_http_requests_tools_page' ) );
             
 	}
 
@@ -119,9 +119,8 @@ class Inspect_Http_Requests_Admin {
 		if ( ! current_user_can( 'administrator' ) ) {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
-		}                            
-		wp_enqueue_style( $this->plugin_name );                               
-		wp_enqueue_script($this->plugin_name);              
+		}
+             
 		require_once INSPECT_HTTP_REQUESTS_PLUGIN_DIR_PATH . 'admin/partials/inspect-http-requests-admin-display.php';           
         }
 
