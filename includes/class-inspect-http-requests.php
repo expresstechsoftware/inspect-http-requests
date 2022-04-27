@@ -99,6 +99,8 @@ class Inspect_Http_Requests {
 	 */
 	private function load_dependencies() {
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/functions.php';            
+
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
@@ -122,7 +124,7 @@ class Inspect_Http_Requests {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-inspect-http-requests-public.php';
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-inspect-http-requests-listtable.php';
+		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-inspect-http-requests-listtable.php';
                 
                 $this->loader = new Inspect_Http_Requests_Loader();
 
