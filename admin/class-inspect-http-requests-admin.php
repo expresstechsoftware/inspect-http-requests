@@ -146,17 +146,20 @@ class Inspect_Http_Requests_Admin {
                 
 		$request_args = json_encode( $args );
 		$runtime = $args['timeout'];
-		$http_api_call_data = array(
+		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
 			'URL' => sanitize_url ( $url ),
 			'request_args' => $request_args,
 			'response' => json_encode( $response ),
 			'runtime' => $runtime,
 			'date_added' => date('Y-m-d H:i:s'),
 			'is_blocked' => 0                    
-			);
-		if( ! $wpdb->insert( $table_name, $http_api_call_data ) ){    
-			$wpdb->print_error();
-		}                
+			) ) ;
+		if ( false !== $http_api_call_data ) {
+			if( ! $wpdb->insert( $table_name, $http_api_call_data ) ){    
+				$wpdb->print_error();
+			}                    
+		}
+                
 	}
 
 	/**
@@ -206,9 +209,15 @@ class Inspect_Http_Requests_Admin {
 	}
 
 	/**
-	 * Update Satatus URL.
+	 * Filter to ignore specific hostname.
 	 *
 	 * @since    1.0.0
          *
 	 */
+	public function ets_inspect_http_requests_ignore_specific_hostname( $data ){
+		if ( false !== strpos( $data['URL'], 'wordpress.org' ) ) {
+			return false;
+		}
+		return $data;            
+        }
 }        
