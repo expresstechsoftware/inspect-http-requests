@@ -40,6 +40,7 @@ class Inspect_Http_Requests_Activator {
                         response longtext,
                         runtime longtext,
                         date_added datetime,
+                        is_blocked tinyint(1),
 			UNIQUE KEY id (id)
 		) $charset_collate;";
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
