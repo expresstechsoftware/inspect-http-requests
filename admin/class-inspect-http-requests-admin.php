@@ -141,11 +141,13 @@ class Inspect_Http_Requests_Admin {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
                 
+		$request_args = json_encode( $args );
+		$runtime = $args['timeout'];
 		$http_api_call_data = array(
 			'URL' => sanitize_url ( $url ),
-			'request_args' => json_encode( $args ),
+			'request_args' => $request_args,
 			'response' => json_encode( $response ),
-			'runtime' => '',
+			'runtime' => $runtime,
 			'date_added' => date('Y-m-d H:i:s'),
 			'is_blocked' => 0                    
 			);
