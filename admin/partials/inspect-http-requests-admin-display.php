@@ -22,12 +22,13 @@
 	<table class="wp-list-table widefat fixed striped table-view-list posts"> 
 	<thead> 
 	<tr> 
-		<th scope="col" class="manage-column "></th> 
-		<th scope="col" class="manage-column "><?php esc_html_e( 'URL', 'inspect-http-requests' ) ?></th>         
-		<th scope="col" class="manage-column "><?php esc_html_e( 'Request args', 'inspect-http-requests' ) ?></th> 
-		<th scope="col"  class="manage-column "><?php esc_html_e( 'Response', 'inspect-http-requests' ) ?></th> 
-		<th scope="col"  class="manage-column "><?php esc_html_e( 'Runtime', 'inspect-http-requests' ) ?></th> 
-		<th scope="col"  class="manage-column "><?php esc_html_e( 'Date', 'inspect-http-requests' ) ?></th> 
+		<th scope="col" class="manage-column "><?php esc_html_e ( 'ID', 'inspect-http-requests' )?></th> 
+		<th scope="col" class="manage-column "><?php esc_html_e ( 'Block Request', 'inspect-http-requests' )?></th> 
+		<th scope="col" class="manage-column "><?php esc_html_e ( 'URL', 'inspect-http-requests' ) ?></th>         
+		<th scope="col" class="manage-column "><?php esc_html_e ( 'Request args', 'inspect-http-requests' ) ?></th> 
+		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Response', 'inspect-http-requests' ) ?></th> 
+		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Runtime', 'inspect-http-requests' ) ?></th> 
+		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Date', 'inspect-http-requests' ) ?></th> 
 	</tr>         
 	</thead>
 	<?php echo ets_inspect_http_request_get_data()?>

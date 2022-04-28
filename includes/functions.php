@@ -12,6 +12,7 @@ function ets_inspect_http_request_get_data (){
 	foreach ( $list_urls as $list_url ) {
 		( $list_url['is_blocked'] ) ? $cheked = "checked" : $cheked = '' ;
 		$table_list_urls .= '<tr>';  
+                $table_list_urls .= '<td>' . $list_url['ID'] . '</td>';
 		$table_list_urls .= '<td><label class="ets-switch"> <input ' . $cheked . ' name="ets-block-button" type="checkbox" data-id="' . $list_url['ID'] . '"  /><span class="ets-slider round"></span></label><span class="spinner"></span></td>';
 		$table_list_urls .= '<td>' . $list_url['URL'] . '</td>';
 		$table_list_urls .= '<td>' .  $list_url['request_args']  . '</td>';
