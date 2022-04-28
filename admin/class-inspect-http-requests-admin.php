@@ -220,4 +220,26 @@ class Inspect_Http_Requests_Admin {
 		}
 		return $data;            
         }
+
+	/**
+	 * Block HTTP Requests.
+	 *
+	 * @since    1.0.0
+         *
+	 */
+	public function ets_inspect_http_requests_approved_requests ($preempt, $parsed_args, $url  ) {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests'; 
+                
+		$urls_sql = "SELECT `URL` FROM `{$table_name}`  WHERE `is_blocked` = 1 ORDER BY `ID` ASC ;";                
+		$list_urls = $wpdb->get_results( $urls_sql , ARRAY_A );
+		foreach ( $list_urls as $list_url ) {
+			
+			if( strpos( $url, $list_url['URL'] ) !== false ){
+				return new WP_Error( 'http_request_block', __( "This request is not allowed", "inspect-http-requests" ) );
+			}
+			return $preempt;                         
+		}                
+                           
+        }
 }        
