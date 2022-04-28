@@ -28,5 +28,30 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+	if (etsInspectHttpRequestsParams.is_admin) {
+		$(document).on('click', 'input[name="ets-block-button"]', function(){
+                    var ets_checked = $(this).prop('checked');
+                    var ets_url_id = $(this).data('id');
+				$.ajax({
+					url: etsInspectHttpRequestsParams.admin_ajax,
+					type: "POST",
+					context: this,
+					data: { 'action': 'ets_inspect_http_requests_update_status_url', 'ets_url_id': ets_url_id , 'ets_checked' : ets_checked,  'ets_inspect_http_requests_nonce': etsInspectHttpRequestsParams.ets_inspect_http_requests_nonce },
+					beforeSend: function () {                                              
+						$(this).parent().next('span.spinner').addClass("ets-is-active").show();
+					},
+					success: function (data) { 
+                                            console.log(data);                                              
+					},
+					error: function (response, textStatus, errorThrown ) {
+						console.log( textStatus + " :  " + response.status + " : " + errorThrown );
+					},
+					complete: function () {
+						$(this).parent().next('span.spinner').removeClass("ets-is-active").hide();
+					}
+				});                    
+                    
+		});            
+	}
 
 })( jQuery );

@@ -40,7 +40,7 @@ div.ets-inspect-http-requests label.ets-switch span.ets-slider:before {
 }
 
 div.ets-inspect-http-requests input:checked + span.ets-slider {
-  background-color: #2196F3;
+  background-color: #d63638;
 }
 
 div.ets-inspect-http-requests input:focus + span.ets-slider {
@@ -60,4 +60,10 @@ span.ets-slider.round {
 
 span.ets-slider.round:before {
   border-radius: 50%;
+}
+div.ets-inspect-http-requests span.spinner{
+    float: none;
+}
+div.ets-inspect-http-requests span.spinner.ets-is-active{
+    visibility: visible;
 }
