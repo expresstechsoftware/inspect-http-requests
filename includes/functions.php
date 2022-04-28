@@ -17,7 +17,7 @@ function ets_inspect_http_request_get_data (){
 		$table_list_urls .= '<td>' .  $list_url['request_args']  . '</td>';
 		$table_list_urls .= '<td>' . $list_url['response'] . '</td>';
 		$table_list_urls .= '<td>' . $list_url['runtime'] . '</td>';        
-		$table_list_urls .= '<td>' . date_i18n( get_option( 'date_format' ), strtotime( $list_url['date_added'] ) ) . '</td>';                        
+		$table_list_urls .= '<td>' . get_date_from_gmt( $list_url['date_added'] , 'Y-m-d H:i:s' ) . '</td>';                        
 		$table_list_urls .= '</tr>';
 	}
 	$table_list_urls .= '</tbody>'; 
