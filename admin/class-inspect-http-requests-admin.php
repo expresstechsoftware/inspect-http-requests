@@ -139,6 +139,9 @@ class Inspect_Http_Requests_Admin {
 	 */	
 	public function ets_inspect_http_requests_capture_request( $response, $context, $transport, $args, $url ) {
 		global $wpdb;
+		if ( false !== strpos( $url, 'doing_wp_cron' ) ) {
+			return;
+		}                
 		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
                 
 		$request_args = json_encode( $args );
@@ -201,4 +204,11 @@ class Inspect_Http_Requests_Admin {
 //		}                
 
 	}
+
+	/**
+	 * Update Satatus URL.
+	 *
+	 * @since    1.0.0
+         *
+	 */
 }        
