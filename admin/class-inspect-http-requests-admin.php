@@ -40,6 +40,7 @@ class Inspect_Http_Requests_Admin {
 	 */
 	private $version;
 
+	private $start_time;
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -140,18 +141,17 @@ class Inspect_Http_Requests_Admin {
 	public function ets_inspect_http_requests_capture_request( $response, $context, $transport, $args, $url ) {
 		global $wpdb;
 		if ( false !== strpos( $url, 'doing_wp_cron' ) ) {
-			return;
+			//return;
 		}                
 		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
                 
 		$request_args = json_encode( $args );
-		$runtime = $args['timeout'];
 		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
 			'URL' => sanitize_url ( $url ),
 			'request_args' => $request_args,
 			'response' => json_encode( $response ),
 			'transport' => $transport, 
-			'runtime' => $runtime,
+			'runtime' => ( microtime( true ) - $this->start_time ),
 			'date_added' => date('Y-m-d H:i:s'),
 			'is_blocked' => 0                    
 			) ) ;
@@ -250,4 +250,8 @@ class Inspect_Http_Requests_Admin {
 //		}                
                            
         }
+	public function ets_inspect_http_requests_get_runtime ( $args ) {
+		$this->start_time = microtime( true );
+		return $args;            
+	}
 }        
