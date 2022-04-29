@@ -38,6 +38,7 @@ class Inspect_Http_Requests_Activator {
                         URL longtext,
                         request_args longtext,
                         response longtext,
+                        transport longtext,
                         runtime longtext,
                         date_added datetime,
                         is_blocked tinyint(1),

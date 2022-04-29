@@ -13,10 +13,16 @@
  */
 ?>
 <div class="wrap ets-inspect-http-requests">
+    
 	<h1 class="wp-heading-inline"><?php esc_html_e( 'List all the HTTP Requests', 'inspect-http-requests' ) ?></h1
 	<hr class="wp-header-end">
 	<h2 class="screen-reader-text"><?php esc_html_e( 'Filter HTTP Requests', 'inspect-http-requests' ) ?></h2>
 	<div class="tablenav top">
+		<p class="search-box">
+                    <label class="screen-reader-text" for="plugin-search-input"><?php esc_html_e ( 'Search URL, Request args and Response', 'inspect-http-requests' )?></label>
+			<input type="search" id="ets-inspect-http-requests-search-input" name="s" value="">
+			<input type="submit" id="ets-inspect-http-requestssearch-submit" class="button" value="<?php esc_html_e ( 'Search URL, Request args and Response', 'inspect-http-requests' )?>">
+		</p>
 	<br class="clear">
 	</div>
 	<table class="wp-list-table widefat fixed striped table-view-list posts"> 
@@ -27,6 +33,7 @@
 		<th scope="col" class="manage-column "><?php esc_html_e ( 'URL', 'inspect-http-requests' ) ?></th>         
 		<th scope="col" class="manage-column "><?php esc_html_e ( 'Request args', 'inspect-http-requests' ) ?></th> 
 		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Response', 'inspect-http-requests' ) ?></th> 
+		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Transport', 'inspect-http-requests' ) ?></th>                 
 		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Runtime', 'inspect-http-requests' ) ?></th> 
 		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Date', 'inspect-http-requests' ) ?></th> 
 	</tr>         

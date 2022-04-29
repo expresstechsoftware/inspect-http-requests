@@ -8,7 +8,7 @@ function ets_inspect_http_request_get_data (){
 	$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
 	$sql = "SELECT * FROM {$table_name} ORDER BY `ID` ASC ;";
 	$list_urls = $wpdb->get_results( $sql , ARRAY_A );
-	$table_list_urls = '<tbody id="the-list">'; 
+	$table_list_urls = '<tbody id="ets-inspect-http-requests-list">'; 
 	foreach ( $list_urls as $list_url ) {
 		( $list_url['is_blocked'] ) ? $cheked = "checked" : $cheked = '' ;
 		$table_list_urls .= '<tr>';  
@@ -17,6 +17,7 @@ function ets_inspect_http_request_get_data (){
 		$table_list_urls .= '<td>' . $list_url['URL'] . '</td>';
 		$table_list_urls .= '<td>' .  $list_url['request_args']  . '</td>';
 		$table_list_urls .= '<td>' . $list_url['response'] . '</td>';
+		$table_list_urls .= '<td>' . $list_url['transport'] . '</td>';                
 		$table_list_urls .= '<td>' . $list_url['runtime'] . '</td>';        
 		$table_list_urls .= '<td>' . get_date_from_gmt( $list_url['date_added'] , 'Y-m-d H:i:s' ) . '</td>';                        
 		$table_list_urls .= '</tr>';

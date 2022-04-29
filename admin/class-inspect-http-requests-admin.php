@@ -150,6 +150,7 @@ class Inspect_Http_Requests_Admin {
 			'URL' => sanitize_url ( $url ),
 			'request_args' => $request_args,
 			'response' => json_encode( $response ),
+			'transport' => $transport, 
 			'runtime' => $runtime,
 			'date_added' => date('Y-m-d H:i:s'),
 			'is_blocked' => 0                    
