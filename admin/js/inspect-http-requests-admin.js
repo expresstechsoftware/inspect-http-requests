@@ -51,7 +51,33 @@
 					}
 				});                    
                     
-		});            
+		});
+		$(document).on('click', '#ets-inspect-http-requestssearch-submit', function(){
+
+                    var s = $("#ets-inspect-http-requests-search-input").val();
+
+				$.ajax({
+					url: etsInspectHttpRequestsParams.admin_ajax,
+					type: "POST",
+					context: this,
+					data: { 'action': 'ets_inspect_http_requests_search', 's': s,  'ets_inspect_http_requests_nonce': etsInspectHttpRequestsParams.ets_inspect_http_requests_nonce },
+					beforeSend: function () {                                              
+						$(this).parent().find('span.spinner').addClass("ets-is-active").show();
+                                                $('tbody#ets-inspect-http-requests-list').html("");
+					},
+					success: function (data) { 
+                                            //console.log(data);
+                                            $('tbody#ets-inspect-http-requests-list').html(data);
+					},
+					error: function (response, textStatus, errorThrown ) {
+						console.log( textStatus + " :  " + response.status + " : " + errorThrown );
+					},
+					complete: function () {
+						$(this).parent().find('span.spinner').removeClass("ets-is-active").hide();
+					}
+				});                    
+                    
+		});                 
 	}
 
 })( jQuery );

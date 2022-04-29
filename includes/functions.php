@@ -3,12 +3,16 @@
 * common functions file.
 */
 
-function ets_inspect_http_request_get_data (){
+function ets_inspect_http_request_get_data ( $search = false ){
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
-	$sql = "SELECT * FROM {$table_name} ORDER BY `ID` ASC ;";
+        if( $search === false  ){
+		$sql = "SELECT * FROM {$table_name} ORDER BY `ID` ASC ;";
+	} else {
+		$sql = "SELECT * FROM {$table_name} WHERE `URL` LIKE '%$search%' OR `request_args` LIKE '%$search%' OR `response` LIKE '%$search%'  ORDER BY `ID` ASC ;";            
+	}
 	$list_urls = $wpdb->get_results( $sql , ARRAY_A );
-	$table_list_urls = '<tbody id="ets-inspect-http-requests-list">'; 
+	$table_list_urls = ''; 
 	foreach ( $list_urls as $list_url ) {
 		( $list_url['is_blocked'] ) ? $cheked = "checked" : $cheked = '' ;
 		$table_list_urls .= '<tr>';  
@@ -22,8 +26,7 @@ function ets_inspect_http_request_get_data (){
 		$table_list_urls .= '<td>' . get_date_from_gmt( $list_url['date_added'] , 'Y-m-d H:i:s' ) . '</td>';                        
 		$table_list_urls .= '</tr>';
 	}
-	$table_list_urls .= '</tbody>'; 
-	$table_list_urls .= '</table>';         
+        
     
 	return $table_list_urls;
 }

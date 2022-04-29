@@ -164,6 +164,7 @@ class Inspect_Http_Requests {
 		$this->loader->add_filter( 'pre_http_request', $plugin_admin, 'ets_inspect_http_requests_approved_requests', 10, 3 );                
 		$this->loader->add_filter( 'ets_inspect_http_requests_ignore_hostname', $plugin_admin, 'ets_inspect_http_requests_ignore_specific_hostname', 10, 1 );                                
 		$this->loader->add_filter( 'http_request_args', $plugin_admin, 'ets_inspect_http_requests_get_runtime', 10, 1 );                                                
+		$this->loader->add_action( 'wp_ajax_ets_inspect_http_requests_search', $plugin_admin, 'ets_inspect_http_requests_search' );                                                                                                                                
 
 	}
 

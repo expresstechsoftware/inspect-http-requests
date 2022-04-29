@@ -141,7 +141,7 @@ class Inspect_Http_Requests_Admin {
 	public function ets_inspect_http_requests_capture_request( $response, $context, $transport, $args, $url ) {
 		global $wpdb;
 		if ( false !== strpos( $url, 'doing_wp_cron' ) ) {
-			//return;
+			return;
 		}                
 		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
                 
@@ -250,8 +250,29 @@ class Inspect_Http_Requests_Admin {
 //		}                
                            
         }
+
 	public function ets_inspect_http_requests_get_runtime ( $args ) {
 		$this->start_time = microtime( true );
 		return $args;            
+	}
+
+	public function ets_inspect_http_requests_search () {
+            
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';                
+		if ( ! current_user_can( 'administrator' ) ) {
+			wp_send_json_error( 'You do not have sufficient rights', 403 );
+			exit();
+		}
+		// Check for nonce security
+		if ( ! wp_verify_nonce( $_POST['ets_inspect_http_requests_nonce'], 'ets-inspect-http-requests-ajax-nonce' ) ) {
+			wp_send_json_error( 'You do not have sufficient rights', 403 );
+			exit();
+		}
+                //echo '<tbody id="ets-inspect-http-requests-list">';
+		echo ets_inspect_http_request_get_data( $_POST['s'] );
+		//echo '</tbody>'; 
+		//echo '</table>';
+		exit();
 	}
 }        

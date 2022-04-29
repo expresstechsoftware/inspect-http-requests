@@ -19,7 +19,8 @@
 	<h2 class="screen-reader-text"><?php esc_html_e( 'Filter HTTP Requests', 'inspect-http-requests' ) ?></h2>
 	<div class="tablenav top">
 		<p class="search-box">
-                    <label class="screen-reader-text" for="plugin-search-input"><?php esc_html_e ( 'Search URL, Request args and Response', 'inspect-http-requests' )?></label>
+			<label class="screen-reader-text" for="plugin-search-input"><?php esc_html_e ( 'Search URL, Request args and Response', 'inspect-http-requests' )?></label>
+			<span class="spinner"></span>
 			<input type="search" id="ets-inspect-http-requests-search-input" name="s" value="">
 			<input type="submit" id="ets-inspect-http-requestssearch-submit" class="button" value="<?php esc_html_e ( 'Search URL, Request args and Response', 'inspect-http-requests' )?>">
 		</p>
@@ -38,6 +39,9 @@
 		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Date', 'inspect-http-requests' ) ?></th> 
 	</tr>         
 	</thead>
+	<tbody id="ets-inspect-http-requests-list">
 	<?php echo ets_inspect_http_request_get_data()?>
+        </tbody>
+	<table>
 </div>
 
