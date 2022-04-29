@@ -67,3 +67,6 @@ div.ets-inspect-http-requests span.spinner{
 div.ets-inspect-http-requests span.spinner.ets-is-active{
     visibility: visible;
 }
+div.ets-inspect-http-requests p.search-box span.spinner{
+    float: left;
+}

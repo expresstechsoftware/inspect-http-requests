@@ -41,6 +41,8 @@ class Inspect_Http_Requests_Admin {
 	private $version;
 
 	private $start_time;
+
+	private $table_name;                
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -49,9 +51,10 @@ class Inspect_Http_Requests_Admin {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
+		global $wpdb;
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+                $this->table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
 
 	}
 
@@ -143,7 +146,7 @@ class Inspect_Http_Requests_Admin {
 		if ( false !== strpos( $url, 'doing_wp_cron' ) ) {
 			return;
 		}                
-		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
+		$table_name = $this->table_name;
                 
 		$request_args = json_encode( $args );
 		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
@@ -172,7 +175,7 @@ class Inspect_Http_Requests_Admin {
 	public function ets_inspect_http_requests_update_status_url( ) {
             
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';                
+		$table_name = $this->table_name;               
 		if ( ! current_user_can( 'administrator' ) ) {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
@@ -230,7 +233,7 @@ class Inspect_Http_Requests_Admin {
 	 */
 	public function ets_inspect_http_requests_approved_requests ($preempt, $parsed_args, $url  ) {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests'; 
+		$table_name = $this->table_name; 
 		$urls_sql = "SELECT `URL` FROM `{$table_name}`  WHERE `is_blocked` = 1 and  POSITION(\"$url\" IN `URL`) > 0;";
 		$list_urls = $wpdb->get_results( $urls_sql , ARRAY_A );
 		if( is_array( $list_urls ) && count( $list_urls ) > 0 ){
@@ -258,8 +261,7 @@ class Inspect_Http_Requests_Admin {
 
 	public function ets_inspect_http_requests_search () {
             
-		global $wpdb;
-		$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';                
+                
 		if ( ! current_user_can( 'administrator' ) ) {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
@@ -269,10 +271,39 @@ class Inspect_Http_Requests_Admin {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
 		}
-                //echo '<tbody id="ets-inspect-http-requests-list">';
 		echo ets_inspect_http_request_get_data( $_POST['s'] );
-		//echo '</tbody>'; 
-		//echo '</table>';
+		exit();
+	}
+
+	public function ets_inspect_http_requests_add_valid_url () {
+            
+		global $wpdb;
+                
+		$table_name = $this->table_name;                
+		if ( ! current_user_can( 'administrator' ) ) {
+			wp_send_json_error( 'You do not have sufficient rights', 403 );
+			exit();
+		}
+		// Check for nonce security
+		if ( ! wp_verify_nonce( $_POST['ets_inspect_http_requests_nonce'], 'ets-inspect-http-requests-ajax-nonce' ) ) {
+			wp_send_json_error( 'You do not have sufficient rights', 403 );
+			exit();
+		}
+		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
+			'URL' => sanitize_url ( $_POST['valid_url'] ),
+			'request_args' => '',
+			'response' => '',
+			'transport' => '', 
+			'runtime' => '',
+			'date_added' => date('Y-m-d H:i:s'),
+			'is_blocked' => 0                    
+			) ) ;
+		if ( false !== $http_api_call_data ) {
+			if( ! $wpdb->insert( $table_name, $http_api_call_data ) ){    
+				$wpdb->print_error();
+			}                    
+		}                
+		echo ets_inspect_http_request_get_data( );
 		exit();
 	}
 }        

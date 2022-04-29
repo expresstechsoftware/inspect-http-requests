@@ -18,9 +18,15 @@
 	<hr class="wp-header-end">
 	<h2 class="screen-reader-text"><?php esc_html_e( 'Filter HTTP Requests', 'inspect-http-requests' ) ?></h2>
 	<div class="tablenav top">
+		<div class="alignleft">
+			<label class="screen-reader-text" for="ets-inspect-http-requests-valid-url"><?php esc_html_e ( 'Add validation for Valid URL', 'inspect-http-requests' )?></label>
+			<input type="text" name="ets-valid-url" id="ets-inspect-http-requests-valid-url" placeholder="<?php esc_html_e ( 'Valid URL', 'inspect-http-requests' )?>" value="">
+			<input type="submit"  class="button action" id="ets-inspect-http-requests-valid-url-submit" value="<?php esc_html_e ( 'Add', 'inspect-http-requests' )?>">
+                        <span class="spinner"></span>
+		</div>
 		<p class="search-box">
-			<label class="screen-reader-text" for="plugin-search-input"><?php esc_html_e ( 'Search URL, Request args and Response', 'inspect-http-requests' )?></label>
-			<span class="spinner"></span>
+                    <span class="spinner"></span>
+			<label class="screen-reader-text" for="ets-inspect-http-requests-search-input"><?php esc_html_e ( 'Search URL, Request args and Response', 'inspect-http-requests' )?></label>			
 			<input type="search" id="ets-inspect-http-requests-search-input" name="s" value="">
 			<input type="submit" id="ets-inspect-http-requestssearch-submit" class="button" value="<?php esc_html_e ( 'Search URL, Request args and Response', 'inspect-http-requests' )?>">
 		</p>
