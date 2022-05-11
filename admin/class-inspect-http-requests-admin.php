@@ -222,6 +222,9 @@ class Inspect_Http_Requests_Admin {
 		if ( false !== strpos( $data['URL'], 'wordpress.org' ) ) {
 			return false;
 		}
+		if ( ets_inspect_http_request_check_duplicate_url( $data['URL'] ) ) {
+			return false;                    
+		}
 		return $data;            
         }
 

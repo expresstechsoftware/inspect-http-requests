@@ -30,3 +30,19 @@ function ets_inspect_http_request_get_data ( $search = false ){
     
 	return $table_list_urls;
 }
+
+function ets_inspect_http_request_check_duplicate_url ( $url ){
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
+
+	$sql_query = "SELECT count(`ID`) AS c FROM `{$table_name}` WHERE LOWER(`URL`) = '" . strtolower( trim ( $url ) ) . "' ;";
+        
+	$result = $wpdb->get_results( $sql_query , ARRAY_A );
+        
+	if( is_array( $result ) && isset( $result[0]['c'] ) &&  $result[0]['c'] >= 1 ){
+		return true;
+	} else {
+		return false;
+	}
+    
+}
