@@ -198,18 +198,7 @@ class Inspect_Http_Requests_Admin {
 		} else {
 			$wpdb->print_error();
 		}                
-		exit();                
-//		$data = array(
-//			'is_blocked' =>  $ets_checked
-//                        );
-//		$where = ['ID' => $_POST['ets_url_id'] ];
-//                        
-//		if( $wpdb->update( $table_name, $data, $where )){
-//			echo json_encode(['re' => 'yes']);
-//		} else {
-//			$wpdb->print_error();
-//		}                
-
+		exit();                       
 	}
 
 	/**
@@ -243,18 +232,7 @@ class Inspect_Http_Requests_Admin {
 			return new WP_Error( 'http_request_block', __( "This request is not allowed", "inspect-http-requests" ) );                    
 		} else {
 			return $preempt;                    
-		}
-
-//		$urls_sql = "SELECT `URL` FROM `{$table_name}`  WHERE `is_blocked` = 1 ORDER BY `ID` ASC ;";                
-//		$list_urls = $wpdb->get_results( $urls_sql , ARRAY_A );
-//		foreach ( $list_urls as $list_url ) {
-//			
-//			if( strpos( $url, $list_url['URL'] ) !== false ){
-//				return new WP_Error( 'http_request_block', __( "This request is not allowed", "inspect-http-requests" ) );
-//			}
-//			return $preempt;                         
-//		}                
-                           
+		}                           
         }
 
 	public function ets_inspect_http_requests_get_runtime ( $args ) {
