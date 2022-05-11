@@ -90,10 +90,12 @@
 					beforeSend: function () {
 						$(this).prop( "disabled", true );
 						$(this).parent().find('span.spinner').addClass("ets-is-active").show();
-                                                $('tbody#ets-inspect-http-requests-list').html("");
 					},
 					success: function (data) { 
-                                            //console.log(data);
+                                            if( data === 'false'){
+                                                console.log(data);
+                                                return;
+                                            }
                                             $('tbody#ets-inspect-http-requests-list').html(data);
 					},
 					error: function (response, textStatus, errorThrown ) {

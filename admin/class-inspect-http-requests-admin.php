@@ -270,6 +270,13 @@ class Inspect_Http_Requests_Admin {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
 		}
+
+		// Validate url 
+		if ( filter_var( trim( $_POST['valid_url'] ) , FILTER_VALIDATE_URL ) === false ){
+			echo 'false';
+			exit();
+		}
+
 		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
 			'URL' => sanitize_url ( $_POST['valid_url'] ),
 			'request_args' => '',
