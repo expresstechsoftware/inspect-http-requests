@@ -46,3 +46,21 @@ function ets_inspect_http_request_check_duplicate_url ( $url ){
 	}
     
 }
+
+function ets_inspect_http_request_log_blocked_url( $url ) {
+	if ( true === WP_DEBUG ) {
+		error_log( $url );
+	}
+}
+
+function ets_inspect_http_request_get_blocked_url( $id ) {
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
+	$url_sql = "SELECT `URL` AS url FROM `{$table_name}`  WHERE `ID` =" . $id . ";";
+	$the_url = $wpdb->get_results( $url_sql , ARRAY_A );
+	if( is_array( $the_url ) && isset( $the_url[0]['url'] ) ){
+		return $the_url[0]['url'];
+	} else {
+		return false;
+	}     
+}

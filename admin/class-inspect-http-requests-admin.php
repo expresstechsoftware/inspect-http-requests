@@ -194,6 +194,10 @@ class Inspect_Http_Requests_Admin {
                
 		$update_sql = $wpdb->prepare( " UPDATE `{$table_name}` SET `is_blocked` = %s WHERE `ID` =%d;" ,$ets_checked, $_POST['ets_url_id'] );
 		if( $wpdb->query( $update_sql ) ){
+			if ( $ets_checked === 1 && ets_inspect_http_request_get_blocked_url ( $_POST['ets_url_id'] ) ) {
+				$url_to_log = ets_inspect_http_request_get_blocked_url ( $_POST['ets_url_id'] );
+				ets_inspect_http_request_log_blocked_url( $url_to_log );                            
+			}                    
 			echo json_encode(['re' => 'yes']);
 		} else {
 			$wpdb->print_error();
