@@ -42,19 +42,19 @@ class Inspect_Http_Requests_Admin {
 
 	private $start_time;
 
-	private $table_name;                
+	private $table_name;
 	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 		global $wpdb;
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-                $this->table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
+		$this->plugin_name        = $plugin_name;
+		$this->version            = $version;
+				$this->table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
 
 	}
 
@@ -102,11 +102,11 @@ class Inspect_Http_Requests_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/inspect-http-requests-admin.js', array( 'jquery' ), $this->version, false );
 		$script_params = array(
-			'admin_ajax'                       => admin_url( 'admin-ajax.php' ),
-			'is_admin'                         => is_admin(),
+			'admin_ajax'                      => admin_url( 'admin-ajax.php' ),
+			'is_admin'                        => is_admin(),
 			'ets_inspect_http_requests_nonce' => wp_create_nonce( 'ets-inspect-http-requests-ajax-nonce' ),
 		);
-		wp_localize_script( $this->plugin_name, 'etsInspectHttpRequestsParams', $script_params );                 
+		wp_localize_script( $this->plugin_name, 'etsInspectHttpRequestsParams', $script_params );
 
 	}
 
@@ -114,68 +114,70 @@ class Inspect_Http_Requests_Admin {
 	 * Method to add inspect http requests sub-menu under WP Top-level menu Tools
 	 *
 	 * @since    1.0.0
-	 */        
+	 */
 	public function ets_inspect_http_requests_add_tools_menu() {
-		add_submenu_page ( 'tools.php' ,  __( 'Inspect HTTP Request', 'inspect-http-requests' ) , __( 'Inspect HTTP Request', 'inspect-http-requests' ), 'manage_options', 'inspect-http-requests', array( $this, 'ets_inspect_http_requests_tools_page' ) );
-            
+		add_submenu_page( 'tools.php', __( 'Inspect HTTP Request', 'inspect-http-requests' ), __( 'Inspect HTTP Request', 'inspect-http-requests' ), 'manage_options', 'inspect-http-requests', array( $this, 'ets_inspect_http_requests_tools_page' ) );
+
 	}
 
 	/**
 	 * Callback to display all the HTTP Requests being made.
 	 *
 	 * @since    1.0.0
-	 */        
+	 */
 	public function ets_inspect_http_requests_tools_page() {
 		if ( ! current_user_can( 'administrator' ) ) {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
 		}
-             
-		require_once INSPECT_HTTP_REQUESTS_PLUGIN_DIR_PATH . 'admin/partials/inspect-http-requests-admin-display.php';           
-        }
+
+		require_once INSPECT_HTTP_REQUESTS_PLUGIN_DIR_PATH . 'admin/partials/inspect-http-requests-admin-display.php';
+	}
 
 	/**
 	 * Capture the request and save it inside the DB table.
 	 *
 	 * @since    1.0.0
-         * 
-         * @param type $response
-	 */	
+	 *
+	 * @param type $response
+	 */
 	public function ets_inspect_http_requests_capture_request( $response, $context, $transport, $args, $url ) {
 		global $wpdb;
 		if ( false !== strpos( $url, 'doing_wp_cron' ) ) {
 			return;
-		}                
-		$table_name = $this->table_name;
-                
-		$request_args = json_encode( $args );
-		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
-			'URL' => sanitize_url ( $url ),
-			'request_args' => $request_args,
-			'response' => json_encode( $response ),
-			'transport' => $transport, 
-			'runtime' => ( microtime( true ) - $this->start_time ),
-			'date_added' => date('Y-m-d H:i:s'),
-			'is_blocked' => 0                    
-			) ) ;
-		if ( false !== $http_api_call_data ) {
-			if( ! $wpdb->insert( $table_name, $http_api_call_data ) ){    
-				$wpdb->print_error();
-			}                    
 		}
-                
+		$table_name = $this->table_name;
+
+		$request_args       = json_encode( $args );
+		$http_api_call_data = apply_filters(
+			'ets_inspect_http_requests_ignore_hostname',
+			array(
+				'URL'          => sanitize_url( $url ),
+				'request_args' => $request_args,
+				'response'     => json_encode( $response ),
+				'transport'    => $transport,
+				'runtime'      => ( microtime( true ) - $this->start_time ),
+				'date_added'   => date( 'Y-m-d H:i:s' ),
+				'is_blocked'   => 0,
+			)
+		);
+		if ( false !== $http_api_call_data ) {
+			if ( ! $wpdb->insert( $table_name, $http_api_call_data ) ) {
+				$wpdb->print_error();
+			}
+		}
+
 	}
 
 	/**
 	 * Update Satatus URL.
 	 *
 	 * @since    1.0.0
-         *
 	 */
-	public function ets_inspect_http_requests_update_status_url( ) {
-            
+	public function ets_inspect_http_requests_update_status_url() {
+
 		global $wpdb;
-		$table_name = $this->table_name;               
+		$table_name = $this->table_name;
 		if ( ! current_user_can( 'administrator' ) ) {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
@@ -185,30 +187,20 @@ class Inspect_Http_Requests_Admin {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
 		}
-                
-		if( $_POST['ets_checked'] == 'true'){
-			$ets_checked =  1;
+
+		if ( $_POST['ets_checked'] == 'true' ) {
+			$ets_checked = 1;
 		} else {
-			$ets_checked =  0;
+			$ets_checked = 0;
 		}
-               
-		$update_sql = $wpdb->prepare( " UPDATE `{$table_name}` SET `is_blocked` = %s WHERE `ID` =%d;" ,$ets_checked, $_POST['ets_url_id'] );
-		if( $wpdb->query( $update_sql ) ){
-			echo json_encode(['re' => 'yes']);
+
+		$update_sql = $wpdb->prepare( " UPDATE `{$table_name}` SET `is_blocked` = %s WHERE `ID` =%d;", $ets_checked, sanitize_text_field( $_POST['ets_url_id'] ) );
+		if ( $wpdb->query( $update_sql ) ) {
+			echo json_encode( array( 're' => 'yes' ) );
 		} else {
 			$wpdb->print_error();
-		}                
-		exit();                
-//		$data = array(
-//			'is_blocked' =>  $ets_checked
-//                        );
-//		$where = ['ID' => $_POST['ets_url_id'] ];
-//                        
-//		if( $wpdb->update( $table_name, $data, $where )){
-//			echo json_encode(['re' => 'yes']);
-//		} else {
-//			$wpdb->print_error();
-//		}                
+		}
+		exit();
 
 	}
 
@@ -216,55 +208,42 @@ class Inspect_Http_Requests_Admin {
 	 * Filter to ignore specific hostname.
 	 *
 	 * @since    1.0.0
-         *
 	 */
-	public function ets_inspect_http_requests_ignore_specific_hostname( $data ){
+	public function ets_inspect_http_requests_ignore_specific_hostname( $data ) {
 		if ( false !== strpos( $data['URL'], 'wordpress.org' ) ) {
 			return false;
 		}
 		if ( ets_inspect_http_request_check_duplicate_url( $data['URL'] ) ) {
-			return false;                    
+			return false;
 		}
-		return $data;            
-        }
+		return $data;
+	}
 
 	/**
 	 * Block HTTP Requests.
 	 *
 	 * @since    1.0.0
-         *
 	 */
-	public function ets_inspect_http_requests_approved_requests ($preempt, $parsed_args, $url  ) {
+	public function ets_inspect_http_requests_approved_requests( $preempt, $parsed_args, $url ) {
 		global $wpdb;
-		$table_name = $this->table_name; 
-		$urls_sql = "SELECT `URL` FROM `{$table_name}`  WHERE `is_blocked` = 1 and  POSITION(\"$url\" IN `URL`) > 0;";
-		$list_urls = $wpdb->get_results( $urls_sql , ARRAY_A );
-		if( is_array( $list_urls ) && count( $list_urls ) > 0 ){
-			return new WP_Error( 'http_request_block', __( "This request is not allowed", "inspect-http-requests" ) );                    
+		$table_name = $this->table_name;
+		$urls_sql   = "SELECT `URL` FROM `{$table_name}`  WHERE `is_blocked` = 1 and  POSITION(\"$url\" IN `URL`) > 0;";
+		$list_urls  = $wpdb->get_results( $urls_sql, ARRAY_A );
+		if ( is_array( $list_urls ) && count( $list_urls ) > 0 ) {
+			return new WP_Error( 'http_request_block', __( 'This request is not allowed', 'inspect-http-requests' ) );
 		} else {
-			return $preempt;                    
+			return $preempt;
 		}
 
-//		$urls_sql = "SELECT `URL` FROM `{$table_name}`  WHERE `is_blocked` = 1 ORDER BY `ID` ASC ;";                
-//		$list_urls = $wpdb->get_results( $urls_sql , ARRAY_A );
-//		foreach ( $list_urls as $list_url ) {
-//			
-//			if( strpos( $url, $list_url['URL'] ) !== false ){
-//				return new WP_Error( 'http_request_block', __( "This request is not allowed", "inspect-http-requests" ) );
-//			}
-//			return $preempt;                         
-//		}                
-                           
-        }
-
-	public function ets_inspect_http_requests_get_runtime ( $args ) {
-		$this->start_time = microtime( true );
-		return $args;            
 	}
 
-	public function ets_inspect_http_requests_search () {
-            
-                
+	public function ets_inspect_http_requests_get_runtime( $args ) {
+		$this->start_time = microtime( true );
+		return $args;
+	}
+
+	public function ets_inspect_http_requests_search() {
+
 		if ( ! current_user_can( 'administrator' ) ) {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
@@ -278,11 +257,11 @@ class Inspect_Http_Requests_Admin {
 		exit();
 	}
 
-	public function ets_inspect_http_requests_add_valid_url () {
-            
+	public function ets_inspect_http_requests_add_valid_url() {
+
 		global $wpdb;
-                
-		$table_name = $this->table_name;                
+
+		$table_name = $this->table_name;
 		if ( ! current_user_can( 'administrator' ) ) {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
@@ -292,21 +271,24 @@ class Inspect_Http_Requests_Admin {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
 		}
-		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
-			'URL' => sanitize_url ( $_POST['valid_url'] ),
-			'request_args' => '',
-			'response' => '',
-			'transport' => '', 
-			'runtime' => '',
-			'date_added' => date('Y-m-d H:i:s'),
-			'is_blocked' => 0                    
-			) ) ;
+		$http_api_call_data = apply_filters(
+			'ets_inspect_http_requests_ignore_hostname',
+			array(
+				'URL'          => sanitize_url( $_POST['valid_url'] ),
+				'request_args' => '',
+				'response'     => '',
+				'transport'    => '',
+				'runtime'      => '',
+				'date_added'   => date( 'Y-m-d H:i:s' ),
+				'is_blocked'   => 0,
+			)
+		);
 		if ( false !== $http_api_call_data ) {
-			if( ! $wpdb->insert( $table_name, $http_api_call_data ) ){    
+			if ( ! $wpdb->insert( $table_name, $http_api_call_data ) ) {
 				$wpdb->print_error();
-			}                    
-		}                
-		echo ets_inspect_http_request_get_data( );
+			}
+		}
+		echo ets_inspect_http_request_get_data();
 		exit();
 	}
-}        
+}
