@@ -3,12 +3,12 @@ Contributors: expresstechsoftware
 Donate link: https://www.expresstechsoftwares.com
 Tags: log, wp_http, requests, update checks, api, http_api_debug, pre_http_request, http_request_args
 Requires at least: 3.0.1
-Tested up to: 5.8.1
-Stable tag: 4.3
+Tested up to: 6.0
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Log, view, and Block all WP HTTP requests
+Log, view, and Block WP HTTP requests
 
 == Description ==
 ** This plugin is inpired from the work of log-http-requests plugin ** 
