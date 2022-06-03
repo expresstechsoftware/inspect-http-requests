@@ -1,19 +1,6 @@
 <?php
 
 /**
- * Define the internationalization functionality
- *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
- *
- * @link       https://www.expresstechsoftwares.com
- * @since      1.0.0
- *
- * @package    Inspect_Http_Requests
- * @subpackage Inspect_Http_Requests/includes
- */
-
-/**
  * Define the internationalization functionality.
  *
  * Loads and defines the internationalization files for this plugin

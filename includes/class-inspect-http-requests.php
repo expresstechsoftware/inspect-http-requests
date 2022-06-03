@@ -1,19 +1,6 @@
 <?php
 
 /**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       https://www.expresstechsoftwares.com
- * @since      1.0.0
- *
- * @package    Inspect_Http_Requests
- * @subpackage Inspect_Http_Requests/includes
- */
-
-/**
  * The core plugin class.
  *
  * This is used to define internationalization, admin-specific hooks, and
@@ -177,11 +164,6 @@ class Inspect_Http_Requests {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
-
-		$plugin_public = new Inspect_Http_Requests_Public( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 

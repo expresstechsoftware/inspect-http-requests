@@ -1,16 +1,6 @@
 <?php
 
 /**
- * Fired during plugin activation
- *
- * @link       https://www.expresstechsoftwares.com
- * @since      1.0.0
- *
- * @package    Inspect_Http_Requests
- * @subpackage Inspect_Http_Requests/includes
- */
-
-/**
  * Fired during plugin activation.
  *
  * This class defines all code necessary to run during the plugin's activation.
