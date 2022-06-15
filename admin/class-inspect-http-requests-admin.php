@@ -297,4 +297,30 @@ class Inspect_Http_Requests_Admin {
 		echo ets_inspect_http_request_get_data();
 		exit();
 	}
+
+	public function ets_inspect_http_requests_delete_url (){
+		global $wpdb;
+		$table_name = $this->table_name;
+                
+		if ( ! current_user_can( 'administrator' ) ) {
+			wp_send_json_error( 'You do not have sufficient rights', 403 );
+			exit();
+		}
+		// Check for nonce security
+		if ( ! wp_verify_nonce( $_POST['ets_inspect_http_requests_nonce'], 'ets-inspect-http-requests-ajax-nonce' ) ) {
+			wp_send_json_error( 'You do not have sufficient rights', 403 );
+			exit();
+		}
+		$url_id = $_POST['url_id'];
+		$delete_sql = $wpdb->prepare( "DELETE FROM `{$table_name}` WHERE `ID` ='%d'; " , $url_id );
+		if( $wpdb->query( $delete_sql ) ){
+			echo ets_inspect_http_request_get_data();                    
+			
+		} else {
+			echo 'false';
+		}
+                
+		exit();
+            
+	}
 }

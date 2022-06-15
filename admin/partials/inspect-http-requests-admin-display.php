@@ -43,6 +43,7 @@
 		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Transport', 'inspect-http-requests' ) ?></th>                 
 		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Runtime', 'inspect-http-requests' ) ?></th> 
 		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Date', 'inspect-http-requests' ) ?></th> 
+		<th scope="col"  class="manage-column "><?php esc_html_e ( 'Delete', 'inspect-http-requests' ) ?></th>                 
 	</tr>         
 	</thead>
 	<tbody id="ets-inspect-http-requests-list">

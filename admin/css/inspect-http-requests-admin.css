@@ -76,3 +76,9 @@ input[name=ets-valid-url]{
 div.ets-inspect-http-requests div.tablenav .ets-red-border-input{
     border: 1px solid #f00;
 }
+div.ets-inspect-http-requests span.dashicons{
+    cursor: pointer
+}
+div.ets-inspect-http-requests span.dashicons:hover{
+    color:#f00;
+}

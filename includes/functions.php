@@ -24,6 +24,7 @@ function ets_inspect_http_request_get_data( $search = false ) {
 		$table_list_urls .= '<td>' . $list_url['transport'] . '</td>';
 		$table_list_urls .= '<td>' . round ( (float)$list_url['runtime'] , 4 ) . '</td>';        
 		$table_list_urls .= '<td>' . get_date_from_gmt( $list_url['date_added'] , 'Y-m-d H:i:s' ) . '</td>';                        
+ 		$table_list_urls .= '<td><span data-id="' . $list_url['ID'] . '" class="delete-url  dashicons dashicons-editor-removeformatting"></span><span class="spinner"></span></td>';                                       
 		$table_list_urls .= '</tr>';
 	}
 

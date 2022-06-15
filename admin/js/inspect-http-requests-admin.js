@@ -120,7 +120,36 @@
 					}
 				});                    
                     
-		})               
+		});
+		$(document).on('click', 'span.delete-url', function(){
+				var c =  confirm("Remove URL from database ?");
+				if (c === false) return;
+				var url_id = $(this).data('id');
+				$.ajax({
+					url: etsInspectHttpRequestsParams.admin_ajax,
+					type: "POST",
+					context: this,
+					data: { 'action': 'ets_inspect_http_requests_delete_url', 'url_id': url_id,  'ets_inspect_http_requests_nonce': etsInspectHttpRequestsParams.ets_inspect_http_requests_nonce },
+					beforeSend: function () {
+						$(this).prop( "disabled", true );
+						$(this).next('span.spinner').addClass("ets-is-active").show();
+					},
+					success: function (data) { 
+                                            if( data === 'false'){
+                                                console.log(data);
+                                                return;
+                                            }
+                                            $('tbody#ets-inspect-http-requests-list').html(data);
+					},
+					error: function (response, textStatus, errorThrown ) {
+						console.log( textStatus + " :  " + response.status + " : " + errorThrown );
+					},
+					complete: function () {
+						$(this).next('span.spinner').removeClass("ets-is-active").hide();                                               
+					}
+				});                    
+                    
+		})                 
 	}
 
 })( jQuery );
