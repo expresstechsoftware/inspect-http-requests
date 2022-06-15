@@ -235,20 +235,11 @@ class Inspect_Http_Requests_Admin {
 		if ( is_array( $list_urls ) && count( $list_urls ) > 0 ) {
 			return new WP_Error( 'http_request_block', __( 'This request is not allowed', 'inspect-http-requests' ) );
 		} else {
-<<<<<<< HEAD
-			return $preempt;
-		}
-
-	}
-
-	public function ets_inspect_http_requests_get_runtime( $args ) {
-=======
 			return $preempt;                    
 		}                           
         }
 
 	public function ets_inspect_http_requests_get_runtime ( $args ) {
->>>>>>> pr-5
 		$this->start_time = microtime( true );
 		return $args;
 	}
@@ -282,20 +273,6 @@ class Inspect_Http_Requests_Admin {
 			wp_send_json_error( 'You do not have sufficient rights', 403 );
 			exit();
 		}
-<<<<<<< HEAD
-		$http_api_call_data = apply_filters(
-			'ets_inspect_http_requests_ignore_hostname',
-			array(
-				'URL'          => sanitize_url( $_POST['valid_url'] ),
-				'request_args' => '',
-				'response'     => '',
-				'transport'    => '',
-				'runtime'      => '',
-				'date_added'   => date( 'Y-m-d H:i:s' ),
-				'is_blocked'   => 0,
-			)
-		);
-=======
 
 		// Validate url 
 		if ( filter_var( trim( $_POST['valid_url'] ) , FILTER_VALIDATE_URL ) === false ){
@@ -312,7 +289,6 @@ class Inspect_Http_Requests_Admin {
 			'date_added' => date('Y-m-d H:i:s'),
 			'is_blocked' => 0                    
 			) ) ;
->>>>>>> pr-5
 		if ( false !== $http_api_call_data ) {
 			if ( ! $wpdb->insert( $table_name, $http_api_call_data ) ) {
 				$wpdb->print_error();
