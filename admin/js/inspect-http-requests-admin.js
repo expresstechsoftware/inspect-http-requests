@@ -28,7 +28,12 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+	function EtsisValidUrl(s) {
+		var regexp = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
+		return regexp.test(s);
+	}        
 	if (etsInspectHttpRequestsParams.is_admin) {
+            
 		$(document).on('click', 'input[name="ets-block-button"]', function(){
                     var ets_checked = $(this).prop('checked');
                     var ets_url_id = $(this).data('id');
@@ -80,7 +85,14 @@
 		});
 		$(document).on('click', '#ets-inspect-http-requests-valid-url-submit', function(){
 
-                    var valid_url = $('input[name=ets-valid-url]').val();
+				var valid_url = $('input[name=ets-valid-url]').val();
+				if( EtsisValidUrl (valid_url) === false ){
+					$('input[name=ets-valid-url]').addClass('ets-red-border-input');
+                                        
+					return;
+				} else {
+					$('input[name=ets-valid-url]').removeClass('ets-red-border-input');
+				}
 
 				$.ajax({
 					url: etsInspectHttpRequestsParams.admin_ajax,
@@ -108,7 +120,7 @@
 					}
 				});                    
                     
-		})                
+		})               
 	}
 
 })( jQuery );

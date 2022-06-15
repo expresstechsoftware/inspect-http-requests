@@ -70,3 +70,9 @@ div.ets-inspect-http-requests span.spinner.ets-is-active{
 div.ets-inspect-http-requests p.search-box span.spinner{
     float: left;
 }
+input[name=ets-valid-url]{
+    width: 300px;
+}
+div.ets-inspect-http-requests div.tablenav .ets-red-border-input{
+    border: 1px solid #f00;
+}

@@ -20,7 +20,7 @@
 	<div class="tablenav top">
 		<div class="alignleft">
 			<label class="screen-reader-text" for="ets-inspect-http-requests-valid-url"><?php esc_html_e ( 'Add validation for Valid URL', 'inspect-http-requests' )?></label>
-			<input type="text" name="ets-valid-url" id="ets-inspect-http-requests-valid-url" placeholder="<?php esc_html_e ( 'Valid URL', 'inspect-http-requests' )?>" value="">
+                        <input type="url" name="ets-valid-url" id="ets-inspect-http-requests-valid-url" placeholder="<?php esc_html_e ( 'Valid URL', 'inspect-http-requests' )?>" value="">
 			<input type="submit"  class="button action" id="ets-inspect-http-requests-valid-url-submit" value="<?php esc_html_e ( 'Add', 'inspect-http-requests' )?>">
                         <span class="spinner"></span>
 		</div>
