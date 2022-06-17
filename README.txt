@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: expresstechsoftware
-Donate link: https://www.expresstechsoftwares.com
+Donate link: https://paypal.me/supportets
 Tags: log, wp_http, requests, update checks, api, http_api_debug, pre_http_request, http_request_args
 Requires at least: 3.0.1
 Tested up to: 6.0
