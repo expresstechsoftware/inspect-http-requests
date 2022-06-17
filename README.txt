@@ -39,5 +39,9 @@ add_filter( 'ets_inspect_http_requests_ignore_hostname', function( $data ) {
 1. Download and activate the plugin.
 2. Browse to `Tools > Inspect HTTP Requests` to view log entries.
 
+== Screenshots ==
+1. The plugin menu is Available inside tools
+
+
 = 1.0.0 =
 * Initial release
