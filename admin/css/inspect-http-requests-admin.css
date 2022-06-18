@@ -82,3 +82,15 @@ div.ets-inspect-http-requests span.dashicons{
 div.ets-inspect-http-requests span.dashicons:hover{
     color:#f00;
 }
+div.ets-pop{
+    position:absolute;
+    display: none;
+    background: #eee;
+    padding: 5px 10px;
+    border-radius: 8px;
+    max-width: 450px;    
+    
+}
+.ets-response-json{
+    display: none;
+}
