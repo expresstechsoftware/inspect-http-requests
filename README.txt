@@ -39,6 +39,12 @@ add_filter( 'ets_inspect_http_requests_ignore_hostname', function( $data ) {
 1. Download and activate the plugin.
 2. Browse to `Tools > Inspect HTTP Requests` to view log entries.
 
+== Checkout Our Other Plugins ==
+1. [Connect PMPRO and Discord](https://wordpress.org/plugins/pmpro-discord-add-on/)
+2. [Connect LearnDash and Discord](https://wordpress.org/plugins/connect-learndash-and-discord/)
+3. [Connect MemberPress and Discord](https://wordpress.org/plugins/expresstechsoftwares-memberpress-discord-add-on/)
+3. [Product Questions & Answers for WooCommerce](https://wordpress.org/plugins/product-questions-answers-for-woocommerce/)
+
 == Screenshots ==
 1. The plugin menu is Available inside tools
 
