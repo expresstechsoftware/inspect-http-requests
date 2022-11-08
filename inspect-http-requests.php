@@ -9,7 +9,7 @@
  * Plugin Name:       Inspect HTTP Requests
  * Plugin URI:        https://www.expresstechsoftwares.com/inspect-http-requests
  * Description:       Monitor all the HTTP Request being made via WP HTTP Methods i.e. wp_remote_get, wp_remote_post Block any request by just a click of button.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            ExpressTech Softwares Solutions Pvt Ltd
  * Author URI:        https://www.expresstechsoftwares.com
  * License:           GPL-2.0+
@@ -25,7 +25,6 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Currently plugin version.
- * 
  */
 define( 'INSPECT_HTTP_REQUESTS_VERSION', '1.0.0' );
 
