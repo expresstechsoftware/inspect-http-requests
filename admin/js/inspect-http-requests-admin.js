@@ -149,7 +149,14 @@
 					}
 				});                    
                     
-		})                 
+		});
+		$(document).on('click', 'span.ets-arrow', function(){
+			$(this).next('div.ets-pop').html($(this).siblings('ul').html()).toggle('slow');
+		}); 
+		$(document).on('click', 'span.ets-arrow-reponse', function(){
+			var $response = JSON.parse($(this).siblings('textarea').val());
+			$(this).next('div.ets-pop').append(JSON.stringify($response, null, "\t")).toggle('slow');
+		});                
 	}
 
 })( jQuery );
