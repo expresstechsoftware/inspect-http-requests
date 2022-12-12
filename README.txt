@@ -4,7 +4,7 @@ Donate link: https://paypal.me/supportets
 Tags: log, wp_http, requests, update checks, api, http_api_debug, pre_http_request, http_request_args
 Requires at least: 3.0.1
 Tested up to: 6.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,14 +40,20 @@ add_filter( 'ets_inspect_http_requests_ignore_hostname', function( $data ) {
 2. Browse to `Tools > Inspect HTTP Requests` to view log entries.
 
 == Checkout Our Other Plugins ==
-1. [Connect PMPRO and Discord](https://wordpress.org/plugins/pmpro-discord-add-on/)
-2. [Connect LearnDash and Discord](https://wordpress.org/plugins/connect-learndash-and-discord/)
-3. [Connect MemberPress and Discord](https://wordpress.org/plugins/expresstechsoftwares-memberpress-discord-add-on/)
-3. [Product Questions & Answers for WooCommerce](https://wordpress.org/plugins/product-questions-answers-for-woocommerce/)
+1. [Connect MemberPress and Discord](https://wordpress.org/plugins/expresstechsoftwares-memberpress-discord-add-on/)
+2. [Connect PaidmembershipPro and Discord](https://wordpress.org/plugins/pmpro-discord-add-on/)
+3. [Connect LearnPress and Discord](https://wordpress.org/plugins/connect-learnpress-discord-add-on/)
+4. [Connect GamiPress and Discord](https://wordpress.org/plugins/connect-gamipress-and-discord/)
+5. [Connect LifterLMS and Discord](https://wordpress.org/plugins/connect-lifterlms-to-discord/)
+6. [Webhook For WCFM Vendors](https://wordpress.org/plugins/webhook-for-wcfm-vendors/)
+7. [Connect LearnDash and Discord](https://wordpress.org/plugins/connect-learndash-and-discord/)
+8. [Product Questions & Answers for WooCommerce](https://wordpress.org/plugins/product-questions-answers-for-woocommerce/)
+9. [Connect Ultimate Member and Discord](https://wordpress.org/plugins/ultimate-member-discord-add-on/)
 
 == Screenshots ==
 1. The plugin menu is Available inside tools
 
-
+= 1.0.2 =
+* Fixe bug
 = 1.0.0 =
 * Initial release
