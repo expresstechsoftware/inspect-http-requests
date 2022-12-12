@@ -121,23 +121,23 @@ function ets_format_json_request_args ( $request_args ){
 		}
 		$request_args_html .= '</li>';
 	}
-	if ( ! is_null( $request_args->body ) ){
-		$request_args_html .= '<li><b>body : </b>';
-		if ( is_object( $request_args->body ) ){
-			foreach ( $request_args->body as $key => $value ) {
-				$request_args_html .= $key .'  :  ' . $value;    
-			}
-		} else if( is_array( $request_args->body ) ) {
-			foreach ( $request_args->body as $key => $value ) {
-				$request_args_html .= $key .'  :  ' . $value;    
-			}
-		} else if ( is_object( json_decode( $request_args->body ) ) ){
-			foreach ( json_decode( $request_args->body ) as $key => $value ) {
-				$request_args_html .=  $key .' : ' . $value;    
-			}              
-		}
-		$request_args_html .= '</li>';                
-	}
+	// if ( ! is_null( $request_args->body ) ){
+	// 	$request_args_html .= '<li><b>body : </b>';
+	// 	if ( is_object( $request_args->body ) ){
+	// 		foreach ( $request_args->body as $key => $value ) {
+	// 			$request_args_html .= $key .'  :  ' . $value;    
+	// 		}
+	// 	} else if( is_array( $request_args->body ) && count( $request_args->body ) > 0 ) {
+	// 		foreach ( $request_args->body as $key => $value ) {
+	// 			$request_args_html .= $key .'  :  ' . $value;    
+	// 		}
+	// 	} else if ( is_object( json_decode( $request_args->body ) ) ){
+	// 		foreach ( json_decode( $request_args->body ) as $key => $value ) {
+	// 			$request_args_html .=  $key .' : ' . $value;    
+	// 		}              
+	// 	}
+	// 	$request_args_html .= '</li>'; 
+	// }
 	$request_args_html .= '<li><b>compress : </b>' . $compress . '</li>';          
 	$request_args_html .= '<li><b>decompress : </b>' . $decompress . '</li>';
 	$request_args_html .= '<li><b>sslverify : </b>' . $sslverify . '</li>';
@@ -148,34 +148,13 @@ function ets_format_json_request_args ( $request_args ){
 	$request_args_html .= '</ul>';
 	
 	return $request_args_html;
-    
-    
+
 }
 function ets_format_json_response ( $response ){
 	if( ! is_object ( json_decode ( $response ) ) ) {
 		return;
 	}    
 	return '<span class="ets-arrow-reponse dashicons dashicons-arrow-down"></span><div class="ets-pop"></div><textarea class="ets-response-json">'. $response . '</textarea><ul style="display: none;">' . $response . '</ul>';
-        
-//	$response = json_decode($response);
-//    
-//	if ( is_object( $response ) ){
-//        
-//	foreach ( $response as $key => $value ) {
-//		if (is_object( $value ) || is_array ( $value ) ){
-//			foreach ($value as $k => $v) {
-//			if ( is_object( $v ) || is_array ( $v ) ){
-//					foreach ( $v as $ki => $va ) {
-//						return $ki . '"=>"' . $va . '<br>';
-//					}
-//				} else {
-//					return $k . ' ... ' . $v . '<br>';
-//				}
-//			}
-//		} else {
-//			return $key . '=>' . $value . '<br>';
-//		}
-//	}
-//	}
+
 }
 
