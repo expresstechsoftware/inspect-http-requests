@@ -121,23 +121,23 @@ function ets_format_json_request_args ( $request_args ){
 		}
 		$request_args_html .= '</li>';
 	}
-	if ( ! is_null( $request_args->body ) ){
-		$request_args_html .= '<li><b>body : </b>';
-		if ( is_object( $request_args->body ) ){
-			foreach ( $request_args->body as $key => $value ) {
-				$request_args_html .= $key .'  :  ' . $value;    
-			}
-		} else if( is_array( $request_args->body ) ) {
-			foreach ( $request_args->body as $key => $value ) {
-				$request_args_html .= $key .'  :  ' . $value;    
-			}
-		} else if ( is_object( json_decode( $request_args->body ) ) ){
-			foreach ( json_decode( $request_args->body ) as $key => $value ) {
-				$request_args_html .=  $key .' : ' . $value;    
-			}              
-		}
-		$request_args_html .= '</li>'; 
-	}
+	// if ( ! is_null( $request_args->body ) ){
+	// 	$request_args_html .= '<li><b>body : </b>';
+	// 	if ( is_object( $request_args->body ) ){
+	// 		foreach ( $request_args->body as $key => $value ) {
+	// 			$request_args_html .= $key .'  :  ' . $value;    
+	// 		}
+	// 	} else if( is_array( $request_args->body ) && count( $request_args->body ) > 0 ) {
+	// 		foreach ( $request_args->body as $key => $value ) {
+	// 			$request_args_html .= $key .'  :  ' . $value;    
+	// 		}
+	// 	} else if ( is_object( json_decode( $request_args->body ) ) ){
+	// 		foreach ( json_decode( $request_args->body ) as $key => $value ) {
+	// 			$request_args_html .=  $key .' : ' . $value;    
+	// 		}              
+	// 	}
+	// 	$request_args_html .= '</li>'; 
+	// }
 	$request_args_html .= '<li><b>compress : </b>' . $compress . '</li>';          
 	$request_args_html .= '<li><b>decompress : </b>' . $decompress . '</li>';
 	$request_args_html .= '<li><b>sslverify : </b>' . $sslverify . '</li>';
