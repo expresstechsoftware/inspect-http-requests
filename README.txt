@@ -3,8 +3,8 @@ Contributors: expresstechsoftware, webbdeveloper, sunnysoni, vanbom
 Donate link: https://paypal.me/supportets
 Tags: log, wp_http, requests, update checks, api, http_api_debug, pre_http_request, http_request_args
 Requires at least: 3.0.1
-Tested up to: 6.2
-Stable tag: 1.0.3
+Tested up to: 6.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,9 @@ add_filter( 'ets_inspect_http_requests_ignore_hostname', function( $data ) {
 
 == Screenshots ==
 1. The plugin menu is Available inside tools
+
+= 1.0.4 =
+* Support WordPress 6.3
 
 = 1.0.3 =
 * Support WordPress 6.2
