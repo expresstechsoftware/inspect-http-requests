@@ -57,7 +57,7 @@ class Inspect_Http_Requests {
 		if ( defined( 'INSPECT_HTTP_REQUESTS_VERSION' ) ) {
 			$this->version = INSPECT_HTTP_REQUESTS_VERSION;
 		} else {
-			$this->version = '1.0.4';
+			$this->version = '1.0.5';
 		}
 		$this->plugin_name = 'inspect-http-requests';
 
@@ -110,6 +110,8 @@ class Inspect_Http_Requests {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-inspect-http-requests-public.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-inspect-http-requests-admin-notices.php';
 
 		$this->loader = new Inspect_Http_Requests_Loader();
 

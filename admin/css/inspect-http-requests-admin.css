@@ -94,3 +94,36 @@ div.ets-pop{
 .ets-response-json{
     display: none;
 }
+
+/* Notification review */
+div.ets-inspect-http-requests-review-notice{
+  background-color: #FFF;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 !important;
+  position: relative;
+}
+
+div.ets-inspect-http-requests-review-notice div.ets-inspect-http-requests-notice-icon{
+  background-image: url(../images/icon.png);
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 150px;
+}
+div.ets-inspect-http-requests-review-notice div.ets-inspect-http-requests-notice-content{
+  padding: 20px;
+}
+div.ets-inspect-http-requests-review-notice div.ets-inspect-http-requests-notice-content p.ets-inspect-http-requests-signature {
+  display: flex; 
+  align-items: center;
+}
+div.ets-inspect-http-requests-review-notice div.ets-inspect-http-requests-notice-content img{
+  width: 45px;
+  height: auto;
+  border-radius: 50%;
+  margin-left: 15px;
+}
