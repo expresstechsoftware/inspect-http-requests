@@ -34,6 +34,11 @@ define( 'INSPECT_HTTP_REQUESTS_VERSION', '1.0.4' );
 define( 'INSPECT_HTTP_REQUESTS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
+ * Define plugin directory url
+ */
+define( 'INSPECT_HTTP_REQUESTS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
+
+/**
  * The code that runs during plugin activation.
  */
 function activate_inspect_http_requests() {
