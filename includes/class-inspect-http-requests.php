@@ -57,7 +57,7 @@ class Inspect_Http_Requests {
 		if ( defined( 'INSPECT_HTTP_REQUESTS_VERSION' ) ) {
 			$this->version = INSPECT_HTTP_REQUESTS_VERSION;
 		} else {
-			$this->version = '1.0.2';
+			$this->version = '1.0.5';
 		}
 		$this->plugin_name = 'inspect-http-requests';
 
@@ -86,7 +86,7 @@ class Inspect_Http_Requests {
 	 */
 	private function load_dependencies() {
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/functions.php';            
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/functions.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
@@ -110,6 +110,8 @@ class Inspect_Http_Requests {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-inspect-http-requests-public.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-inspect-http-requests-admin-notices.php';
 
 		$this->loader = new Inspect_Http_Requests_Loader();
 
@@ -145,15 +147,15 @@ class Inspect_Http_Requests {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'ets_inspect_http_requests_add_tools_menu' );                
-		$this->loader->add_action( 'http_api_debug', $plugin_admin, 'ets_inspect_http_requests_capture_request', 10, 5 );                                
-		$this->loader->add_action( 'wp_ajax_ets_inspect_http_requests_update_status_url', $plugin_admin, 'ets_inspect_http_requests_update_status_url' );                                                                                                                
-		$this->loader->add_filter( 'pre_http_request', $plugin_admin, 'ets_inspect_http_requests_approved_requests', 10, 3 );                
-		$this->loader->add_filter( 'ets_inspect_http_requests_ignore_hostname', $plugin_admin, 'ets_inspect_http_requests_ignore_specific_hostname', 10, 1 );                                
-		$this->loader->add_filter( 'http_request_args', $plugin_admin, 'ets_inspect_http_requests_get_runtime', 10, 1 );                                                
-		$this->loader->add_action( 'wp_ajax_ets_inspect_http_requests_search', $plugin_admin, 'ets_inspect_http_requests_search' );                                                                                                                                
-		$this->loader->add_action( 'wp_ajax_ets_inspect_http_requests_add_valid_url', $plugin_admin, 'ets_inspect_http_requests_add_valid_url' );                                                                                                                                                
-		$this->loader->add_action( 'wp_ajax_ets_inspect_http_requests_delete_url', $plugin_admin, 'ets_inspect_http_requests_delete_url' );                                                                                                                                                                
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'ets_inspect_http_requests_add_tools_menu' );
+		$this->loader->add_action( 'http_api_debug', $plugin_admin, 'ets_inspect_http_requests_capture_request', 10, 5 );
+		$this->loader->add_action( 'wp_ajax_ets_inspect_http_requests_update_status_url', $plugin_admin, 'ets_inspect_http_requests_update_status_url' );
+		$this->loader->add_filter( 'pre_http_request', $plugin_admin, 'ets_inspect_http_requests_approved_requests', 10, 3 );
+		$this->loader->add_filter( 'ets_inspect_http_requests_ignore_hostname', $plugin_admin, 'ets_inspect_http_requests_ignore_specific_hostname', 10, 1 );
+		$this->loader->add_filter( 'http_request_args', $plugin_admin, 'ets_inspect_http_requests_get_runtime', 10, 1 );
+		$this->loader->add_action( 'wp_ajax_ets_inspect_http_requests_search', $plugin_admin, 'ets_inspect_http_requests_search' );
+		$this->loader->add_action( 'wp_ajax_ets_inspect_http_requests_add_valid_url', $plugin_admin, 'ets_inspect_http_requests_add_valid_url' );
+		$this->loader->add_action( 'wp_ajax_ets_inspect_http_requests_delete_url', $plugin_admin, 'ets_inspect_http_requests_delete_url' );
 
 	}
 

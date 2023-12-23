@@ -1,10 +1,10 @@
 === Plugin Name ===
-Contributors: expresstechsoftware
+Contributors: expresstechsoftware, webbdeveloper, sunnysoni, vanbom
 Donate link: https://paypal.me/supportets
 Tags: log, wp_http, requests, update checks, api, http_api_debug, pre_http_request, http_request_args
 Requires at least: 3.0.1
-Tested up to: 6.1
-Stable tag: 1.0.2
+Tested up to: 6.3
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,10 +49,17 @@ add_filter( 'ets_inspect_http_requests_ignore_hostname', function( $data ) {
 7. [Connect LearnDash and Discord](https://wordpress.org/plugins/connect-learndash-and-discord/)
 8. [Product Questions & Answers for WooCommerce](https://wordpress.org/plugins/product-questions-answers-for-woocommerce/)
 9. [Connect Ultimate Member and Discord](https://wordpress.org/plugins/ultimate-member-discord-add-on/)
+10. [Connect BadgeOS and Discord](https://wordpress.org/plugins/connect-badgeos-to-discord/)
+11. [connect Eduma Theme and Discord](https://wordpress.org/plugins/connect-eduma-theme-to-discord/)
 
 == Screenshots ==
 1. The plugin menu is Available inside tools
 
+= 1.0.4 =
+* Support WordPress 6.3
+
+= 1.0.3 =
+* Support WordPress 6.2
 = 1.0.2 =
 * Fixe bug
 = 1.0.0 =
