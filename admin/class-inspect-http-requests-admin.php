@@ -213,11 +213,9 @@ class Inspect_Http_Requests_Admin {
 	 * @since    1.0.0
 	 */
 	public function ets_inspect_http_requests_ignore_specific_hostname( $data ) {
-
 		/* Get URL of the wordpress site */
 		$site_url = home_url();
-                preg_replace('/https?\/\//', '', $site_url);
-
+  
 		/* Create Whitelist */
 		$whitelisted_urls = "$site_url wordpress.org";
 
