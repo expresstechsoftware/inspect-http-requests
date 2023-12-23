@@ -19,6 +19,9 @@ URI: <a href="http://www.gnu.org/licenses/gpl-2.0.html">http://www.gnu.org/licen
 ‘<a href="http://rankmath.com">rankmath.com</a>’,<br>
 ‘api’,<br>
 ]);</p>
+Add the following for default blocking:<BR>
+define( 'inspect-http-requests-default-block', true );
+</P>
 <p>= Important Links =</p>
 <ul>
 <li><a href="https://github.com/expresstechsoftware/inspect-http-requests">Github →</a></li>
