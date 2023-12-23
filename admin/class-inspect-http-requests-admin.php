@@ -213,9 +213,15 @@ class Inspect_Http_Requests_Admin {
 	 * @since    1.0.0
 	 */
 	public function ets_inspect_http_requests_ignore_specific_hostname( $data ) {
-		if ( false !== strpos( $data['URL'], 'wordpress.org' ) ) {
-			return false;
-		}
+		/* Get URL of the wordpress site */
+		$site_url = home_url();
+  
+		/* Create Whitelist */
+		$whitelisted_urls = "$site_url wordpress.org";
+
+                if ( false !== strpos( $whitelisted_urls, $data['URL'] ) ) {
+                        return false;
+                }
 		if ( ets_inspect_http_request_check_duplicate_url( $data['URL'] ) ) {
 			return false;
 		}
