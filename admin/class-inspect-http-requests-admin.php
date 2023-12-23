@@ -213,15 +213,27 @@ class Inspect_Http_Requests_Admin {
 	 * @since    1.0.0
 	 */
 	public function ets_inspect_http_requests_ignore_specific_hostname( $data ) {
-		/* Get URL of the wordpress site */
-		$site_url = home_url();
-  
-		/* Create Whitelist */
-		$whitelisted_urls = "$site_url wordpress.org";
 
-                if ( false !== strpos( $whitelisted_urls, $data['URL'] ) ) {
-                        return false;
-                }
+		/* Try to get $ignored_urls from wp.config.php */
+		$ignored_urls = get_option('inspect-http-requests-ignored-urls');
+
+		/* Not found? Create a default */
+		if ( !is_array( $ignored_urls ) ) {
+			/* Get the BASE-URL of the wordpress site and remove the scheme  */
+			$site_url = home_url();
+			$url_parts = parse_url($site_url);
+	       		$url_base  = $url_parts['host'];
+			/* Create $ignored_urls */
+			$ignored_urls = [ $url_base, 'wordpress.org'];
+		}
+
+		/* Loop through the ignorelist */
+		foreach ($ignored_urls as $iu) {
+                	if ( false !== strpos( $data['URL'], $iu ) ) {
+                        	return false;
+                	}
+		}
+
 		if ( ets_inspect_http_request_check_duplicate_url( $data['URL'] ) ) {
 			return false;
 		}
