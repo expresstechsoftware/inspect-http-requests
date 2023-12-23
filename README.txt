@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: expresstechsoftware, webbdeveloper, sunnysoni, vanbom
+Contributors: expresstechsoftware, webbdeveloper, sunnysoni, vanbom, eilandert
 Donate link: https://paypal.me/supportets
 Tags: log, wp_http, requests, update checks, api, http_api_debug, pre_http_request, http_request_args
 Requires at least: 3.0.1
@@ -18,16 +18,20 @@ Track how much time a request like updating core/plugin/theme taking (may be use
 
 This plugin logs all WP_HTTP requests and displays them in a table listing for easy viewing. It also stores the runtime of each HTTP request.
 
+If you add a base-url manually (e.g. https://api.woocommerce.com) there will be no more entries stored for that host.
+
 = Available Hooks =
-Don't log items from a specific hostname:
+Don't add url's to the database items from specifics host/domainnames:
 
 <pre>
 add_filter( 'ets_inspect_http_requests_ignore_hostname', function( $data ) {
-    if ( false !== strpos( $data['url'], 'wordpress.org' ) ) {
-        return false;
-    }
-    return $data;
-});
+                $whitelisted_urls = "wprocket.me rankmath.com woocommerce.com jetpack.wordpress.com";
+
+                if ( false !== strpos( $whitelisted_urls, $data['URL'] ) ) {
+                        return false;
+                }
+                return $data;
+        }
 </pre>
 
 = Important Links =
