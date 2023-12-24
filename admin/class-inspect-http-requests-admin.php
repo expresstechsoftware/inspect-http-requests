@@ -151,8 +151,8 @@ class Inspect_Http_Requests_Admin {
 	        /* Try to get $defaultblock from wp_config.php */
                 $defaultblock = get_option('inspect-http-requests-default-block');
                 if ($defaultblock == true) {
-                        $defaultblock = 0;
-                } else { $defaultblock = 1; }
+                        $defaultblock = 1;
+                } else { $defaultblock = 0; }
 
 		$request_args       = json_encode( $args );
 		$http_api_call_data = apply_filters(
@@ -289,8 +289,8 @@ class Inspect_Http_Requests_Admin {
 		/* Try to get $defaultblock from wp_config.php */
                 $defaultblock = get_option('inspect-http-requests-default-block');
                 if ($defaultblock == true) {
-                        $defaultblock = 0;
-                } else { $defaultblock = 1; }
+                        $defaultblock = 1;
+                } else { $defaultblock = 0; }
 
 		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
 			'URL' => sanitize_url ( $_POST['valid_url'] ),
