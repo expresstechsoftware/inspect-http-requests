@@ -148,6 +148,13 @@ class Inspect_Http_Requests_Admin {
 		}
 		$table_name = $this->table_name;
 
+	        /* Try to get $defaultblock from wp_config.php */
+		if ( isset( $inspect_http_requests_default_block ) ) {
+	                $defaultblock = $inspect_http_requests_default_block;
+		} else {
+			$defaultblock = 0;
+		}
+
 		$request_args       = json_encode( $args );
 		$http_api_call_data = apply_filters(
 			'ets_inspect_http_requests_ignore_hostname',
@@ -158,7 +165,7 @@ class Inspect_Http_Requests_Admin {
 				'transport'    => $transport,
 				'runtime'      => ( microtime( true ) - $this->start_time ),
 				'date_added'   => date( 'Y-m-d H:i:s' ),
-				'is_blocked'   => 0,
+				'is_blocked'   => $defaultblock,
 			)
 		);
 		if ( false !== $http_api_call_data ) {
@@ -214,6 +221,7 @@ class Inspect_Http_Requests_Admin {
 	 */
 	public function ets_inspect_http_requests_ignore_specific_hostname( $data ) {
                 /* Try to get array $ignored_urls from wp.config.php */
+
                 $ignored_urls = inspect_http_requests_ignored_urls;
                 if ( !is_array( $ignored_urls ) ) {
                         /* Get the BASE-URL of our wordpress site and remove the scheme */
@@ -295,6 +303,13 @@ class Inspect_Http_Requests_Admin {
 			exit();
 		}
 
+		/* Try to get $defaultblock from wp_config.php */
+                if ( isset( $inspect_http_requests_default_block ) ) {
+                        $defaultblock = $inspect_http_requests_default_block;
+                } else {
+                        $defaultblock = 0;
+                }
+
 		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
 			'URL' => sanitize_url ( $_POST['valid_url'] ),
 			'request_args' => '',
@@ -302,7 +317,7 @@ class Inspect_Http_Requests_Admin {
 			'transport' => '', 
 			'runtime' => '',
 			'date_added' => date('Y-m-d H:i:s'),
-			'is_blocked' => 0                    
+			'is_blocked' => $defaultblock, 
 			) ) ;
 		if ( false !== $http_api_call_data ) {
 			if ( ! $wpdb->insert( $table_name, $http_api_call_data ) ) {
