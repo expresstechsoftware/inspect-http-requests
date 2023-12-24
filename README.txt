@@ -3,8 +3,8 @@ Contributors: expresstechsoftware, webbdeveloper, sunnysoni, vanbom, eilandert
 Donate link: https://paypal.me/supportets
 Tags: log, wp_http, requests, update checks, api, http_api_debug, pre_http_request, http_request_args
 Requires at least: 3.0.1
-Tested up to: 6.3
-Stable tag: 1.0.5
+Tested up to: 6.4.2
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,6 +66,20 @@ define( 'inspect_http_requests_ignored_urls', [
 == Screenshots ==
 1. The plugin menu is Available inside tools
 
+= 1.0.6 =
+* Support Wordpress 6.4.2
+* Sort the admin page on blocked url's and sort URL's on alphabet
+* Stop logging to database if administrator has manually added a matching base-url.
+* Added option to block by default, define( 'inspect-http-requests-default-block', true ) in wp-config.php
+* Added option to create ignore list in wp-config.php, the defaults are 'your own wp' and wordpress.org
+  so that preloaders and updates won't show up. You will override the defaults with:
+<PRE>
+  define( 'inspect_http_requests_ignored_urls', [
+	'wordpress.org',
+        'api.woocommerce.com',
+        'api',
+  ]);
+</PRE>
 = 1.0.4 =
 * Support WordPress 6.3
 
