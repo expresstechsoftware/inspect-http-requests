@@ -148,10 +148,11 @@ class Inspect_Http_Requests_Admin {
 		}
 		$table_name = $this->table_name;
 
-	        /* Try to get $defaultblock from wp_config.php */
-		if ( isset( $inspect_http_requests_default_block ) ) {
-	                $defaultblock = $inspect_http_requests_default_block;
-		} else {
+		/* Try to get $defaultblock from wp_config.php */
+                $defaultblock = get_option('inspect-http-requests-default-block');
+                if ($defaultblock == true) {
+                	$defaultblock = 1;
+                } else {
 			$defaultblock = 0;
 		}
 
@@ -287,9 +288,10 @@ class Inspect_Http_Requests_Admin {
 			exit();
 		}
 
-		/* Try to get $defaultblock from wp_config.php */
-                if ( isset( $inspect_http_requests_default_block ) ) {
-                        $defaultblock = $inspect_http_requests_default_block;
+                /* Try to get $defaultblock from wp_config.php */
+                $defaultblock = get_option('inspect-http-requests-default-block');
+                if ($defaultblock == true) {
+                        $defaultblock = 1;
                 } else {
                         $defaultblock = 0;
                 }
