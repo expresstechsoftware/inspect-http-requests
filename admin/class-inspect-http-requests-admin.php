@@ -220,8 +220,8 @@ class Inspect_Http_Requests_Admin {
 	 */
 	public function ets_inspect_http_requests_ignore_specific_hostname( $data ) {
                 /* Try to get array $ignored_urls from wp.config.php */
-                if (is_array( $inspect-http-requests-ignored-urls ) ) {
-                        $ignored_urls = $inspect-http-requests-ignored-urls;
+                if (is_array( $inspect_http_requests_ignored_urls ) ) {
+                        $ignored_urls = $inspect_http_requests_ignored_urls;
                 } else {
 			/* Not found? Create a default */
                         /* Get the BASE-URL of our wordpress site and remove the scheme */
