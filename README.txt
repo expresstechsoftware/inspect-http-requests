@@ -72,7 +72,7 @@ define( 'inspect_http_requests_ignored_urls', [
 * Stop logging to database if administrator has manually added a matching base-url.
 * Added option to block by default, define( 'inspect-http-requests-default-block', true ) in wp-config.php
 * Added option to create ignore list in wp-config.php, the defaults are 'your own wp' and wordpress.org
-  so that preloaders and updates won't show up. You will override the defaults with:
+  so that preloaders and updates won't show up. If you have a lot of database lookups this WILL speed things up.
 <PRE>
   define( 'inspect_http_requests_ignored_urls', [
 	'wordpress.org',
