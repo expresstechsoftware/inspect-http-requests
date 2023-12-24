@@ -7,7 +7,7 @@ function ets_inspect_http_request_get_data( $search = false ) {
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
 	if ( $search === false ) {
-		$sql = "SELECT * FROM {$table_name} ORDER BY `is_blocked` DESC, `URL` ASC, `ID` ASC ;";
+		$sql = "SELECT * FROM {$table_name} ORDER BY `ID` ASC ;";
 	} else {
 		$sql = "SELECT * FROM {$table_name} WHERE `URL` LIKE '%$search%' OR `request_args` LIKE '%$search%' OR `response` LIKE '%$search%'  ORDER BY `ID` ASC ;";
 	}
