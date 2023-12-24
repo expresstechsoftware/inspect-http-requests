@@ -305,7 +305,7 @@ class Inspect_Http_Requests_Admin {
 		}
 
 		/* Try to get $defaultblock from wp_config.php */
-                if ( isset $inspect_http_requests_default_block ) ) {
+                if ( isset( $inspect_http_requests_default_block ) ) {
                         $defaultblock = $inspect_http_requests_default_block;
                 } else {
                         $defaultblock = 0;
