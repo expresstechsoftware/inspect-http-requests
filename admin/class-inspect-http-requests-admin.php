@@ -213,13 +213,12 @@ class Inspect_Http_Requests_Admin {
 	 * @since    1.0.0
 	 */
 	public function ets_inspect_http_requests_ignore_specific_hostname( $data ) {
-
-		/* Try to get $ignored_urls from wp.config.php */
-		$ignored_urls = get_option('inspect-http-requests-ignored-urls');
-
-		/* Not found? Create a default */
-		if ( !is_array( $ignored_urls ) ) {
-			/* Get the BASE-URL of the wordpress site and remove the scheme  */
+                /* Try to get array $ignored_urls from wp.config.php */
+                if (is_array( $inspect-http-requests-ignored-urls ) ) {
+                        $ignored_urls = $inspect-http-requests-ignored-urls;
+                } else {
+			/* Not found? Create a default */
+                        /* Get the BASE-URL of our wordpress site and remove the scheme */
 			$site_url = home_url();
 			$url_parts = parse_url($site_url);
 	       		$url_base  = $url_parts['host'];
