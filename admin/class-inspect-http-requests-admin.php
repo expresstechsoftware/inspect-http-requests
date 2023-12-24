@@ -221,17 +221,15 @@ class Inspect_Http_Requests_Admin {
 	 */
 	public function ets_inspect_http_requests_ignore_specific_hostname( $data ) {
                 /* Try to get array $ignored_urls from wp.config.php */
-                if (is_array( $inspect_http_requests_ignored_urls ) ) {
-                        $ignored_urls = $inspect_http_requests_ignored_urls;
-                } else {
-			/* Not found? Create a default */
+                $ignored_urls = get_config(inspect_http_requests_ignored_urls);
+                if ( !is_array( $ignored_urls ) ) {
                         /* Get the BASE-URL of our wordpress site and remove the scheme */
-			$site_url = home_url();
-			$url_parts = parse_url($site_url);
-	       		$url_base  = $url_parts['host'];
-			/* Create $ignored_urls */
-			$ignored_urls = [ $url_base, 'wordpress.org'];
-		}
+                        $site_url = home_url();
+                        $url_parts = parse_url($site_url);
+                        $url_base  = $url_parts['host'];
+                        /* Create $ignored_urls */
+                        $ignored_urls = [ $url_base, 'wordpress.org'];
+                }
 
 		/* Loop through the ignorelist */
 		foreach ($ignored_urls as $iu) {
