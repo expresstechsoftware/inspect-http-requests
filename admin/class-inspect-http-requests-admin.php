@@ -148,14 +148,12 @@ class Inspect_Http_Requests_Admin {
 		}
 		$table_name = $this->table_name;
 
-                $default_block=0;  // set default.
                 /* Try to get $default_block from wp_config.php */
                 if (defined('inspect_http_requests_default_block')) {
-                        $default_block = inspect_http_requests_default_block;
-                        if ( ( $default_block == true )||( $default_block == "1" ) ) {
+                        if ( ( inspect_http_requests_default_block == true )||( inspect_http_requests_default_block == "1" ) ) {
                                 $default_block = 1;
-                        }
-                }
+                        } else { $default_block = 0; }
+                } else { $default_block = 0; }
 
 		$request_args       = json_encode( $args );
 		$http_api_call_data = apply_filters(
@@ -289,14 +287,12 @@ class Inspect_Http_Requests_Admin {
 			exit();
 		}
 
-                $default_block=0;  // set default.
                 /* Try to get $default_block from wp_config.php */
                 if (defined('inspect_http_requests_default_block')) {
-                        $default_block = inspect_http_requests_default_block;
-                        if ( ( $default_block == true )||( $default_block == "1" ) ) {
+                        if ( ( inspect_http_requests_default_block == true )||( inspect_http_requests_default_block == "1" ) ) {
                                 $default_block = 1;
-                        }
-                }
+                        } else { $default_block = 0; }
+                } else { $default_block = 0; }
 
 		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
 			'URL' => sanitize_url ( $_POST['valid_url'] ),
