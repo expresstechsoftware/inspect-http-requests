@@ -148,13 +148,14 @@ class Inspect_Http_Requests_Admin {
 		}
 		$table_name = $this->table_name;
 
-		/* Try to get $defaultblock from wp_config.php */
-                $defaultblock = get_option('inspect-http-requests-default-block');
-                if ($defaultblock == true) {
-                	$defaultblock = 1;
-                } else {
-			$defaultblock = 0;
-		}
+                $default_block=0;  // set default.
+                /* Try to get $default_block from wp_config.php */
+                if (defined('inspect_http_requests_default_block')) {
+                        $default_block = inspect_http_requests_default_block;
+                        if ( ( $default_block == true )||( $default_block == "1" ) ) {
+                                $default_block = 1;
+                        }
+                }
 
 		$request_args       = json_encode( $args );
 		$http_api_call_data = apply_filters(
@@ -166,7 +167,7 @@ class Inspect_Http_Requests_Admin {
 				'transport'    => $transport,
 				'runtime'      => ( microtime( true ) - $this->start_time ),
 				'date_added'   => date( 'Y-m-d H:i:s' ),
-				'is_blocked'   => $defaultblock,
+				'is_blocked'   => $default_block,
 			)
 		);
 		if ( false !== $http_api_call_data ) {
@@ -288,12 +289,13 @@ class Inspect_Http_Requests_Admin {
 			exit();
 		}
 
-                /* Try to get $defaultblock from wp_config.php */
-                $defaultblock = get_option('inspect-http-requests-default-block');
-                if ($defaultblock == true) {
-                        $defaultblock = 1;
-                } else {
-                        $defaultblock = 0;
+                $default_block=0;  // set default.
+                /* Try to get $default_block from wp_config.php */
+                if (defined('inspect_http_requests_default_block')) {
+                        $default_block = inspect_http_requests_default_block;
+                        if ( ( $default_block == true )||( $default_block == "1" ) ) {
+                                $default_block = 1;
+                        }
                 }
 
 		$http_api_call_data = apply_filters( 'ets_inspect_http_requests_ignore_hostname', array(
@@ -303,7 +305,7 @@ class Inspect_Http_Requests_Admin {
 			'transport' => '', 
 			'runtime' => '',
 			'date_added' => date('Y-m-d H:i:s'),
-			'is_blocked' => $defaultblock, 
+			'is_blocked' => $default_block, 
 			) ) ;
 		if ( false !== $http_api_call_data ) {
 			if ( ! $wpdb->insert( $table_name, $http_api_call_data ) ) {
