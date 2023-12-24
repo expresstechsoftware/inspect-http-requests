@@ -24,13 +24,13 @@ If you add a base-url manually, e.g. https://api.woocommerce.com,  there will be
 
 Add the following to wp-config.php for default blocking:
 <pre>
-define( 'inspect-http-requests-default-block', true );
+define( 'inspect_http_requests_default_block', true );
 </pre>
 
 To prevent database littering and sql lookups you can ignore (parts of) hostnames: 
 (without this, your own site and wordpress.org are ignored)
 <pre>
-define( 'inspect-http-requests-ignored-urls', [
+define( 'inspect_http_requests_ignored_urls', [
         'your own site',
         'wordpress.org',
         'api.woocommerce.com',
