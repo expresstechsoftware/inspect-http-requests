@@ -57,7 +57,7 @@ class Inspect_Http_Requests {
 		if ( defined( 'INSPECT_HTTP_REQUESTS_VERSION' ) ) {
 			$this->version = INSPECT_HTTP_REQUESTS_VERSION;
 		} else {
-			$this->version = '1.0.5';
+			$this->version = '1.0.6';
 		}
 		$this->plugin_name = 'inspect-http-requests';
 
