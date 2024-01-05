@@ -18,7 +18,7 @@ class Inspect_Http_Requests_Admin_Notices {
 	 */
 	public static function init() {
 
-		add_action( 'admin_notices', array( __CLASS__, 'ets_inspect_http_requests_display_notification' ) );
+		// add_action( 'admin_notices', array( __CLASS__, 'ets_inspect_http_requests_display_notification' ) );
 	}
 
 	/**

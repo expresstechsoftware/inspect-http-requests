@@ -7,7 +7,7 @@ function ets_inspect_http_request_get_data( $search = false ) {
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
 	if ( $search === false ) {
-		$sql = "SELECT * FROM {$table_name} ORDER BY `ID` ASC ;";
+		$sql = "SELECT * FROM {$table_name} ORDER BY `is_blocked` DESC, `URL` ASC, `ID` ASC ;";
 	} else {
 		$sql = "SELECT * FROM {$table_name} WHERE `URL` LIKE '%$search%' OR `request_args` LIKE '%$search%' OR `response` LIKE '%$search%'  ORDER BY `ID` ASC ;";
 	}
@@ -35,16 +35,30 @@ function ets_inspect_http_request_check_duplicate_url( $url ) {
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'ets_wp_outbound_http_requests';
 
-	$sql_query = "SELECT count(`ID`) AS c FROM `{$table_name}` WHERE LOWER(`URL`) = '" . strtolower( trim( $url ) ) . "' ;";
+        /*
+        * Get the base url. Compare it in the database.
+        * If it's manually added it has runtime 0 and we want to ignore it.
+        * This works currently only with base urls
+        */
 
-	$result = $wpdb->get_results( $sql_query, ARRAY_A );
+        $url_parts = parse_url($url);
+        $url_base  = $url_parts['scheme'] . '://' . $url_parts['host'];
+        $sql_query = "SELECT count(`runtime`) AS c FROM `{$table_name}` WHERE LOWER(`URL`) = '" . strtolower( trim( $url_base ) ) . "' and runtime = '' ;";
+        $result = $wpdb->get_results( $sql_query, ARRAY_A );
 
-	if ( is_array( $result ) && isset( $result[0]['c'] ) && $result[0]['c'] >= 1 ) {
-		return true;
-	} else {
-		return false;
-	}
+        if ( is_array( $result ) && isset( $result[0]['c'] ) && $result[0]['c'] >= 1 ) {
+                return true;
+        }
 
+        $sql_query = "SELECT count(`ID`) AS c FROM `{$table_name}` WHERE LOWER(`URL`) = '" . strtolower( trim( $url ) ) . "' ;";
+
+        $result = $wpdb->get_results( $sql_query, ARRAY_A );
+
+        if ( is_array( $result ) && isset( $result[0]['c'] ) && $result[0]['c'] >= 1 ) {
+                return true;
+        }
+
+        return false;
 }
 
 function ets_inspect_http_request_log_blocked_url( $url ) {
