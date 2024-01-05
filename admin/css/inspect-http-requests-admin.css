@@ -127,3 +127,21 @@ div.ets-inspect-http-requests-review-notice div.ets-inspect-http-requests-notice
   border-radius: 50%;
   margin-left: 15px;
 }
+.ets-doc-links {
+  margin-top: 20px;
+}
+
+.ets-doc-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ets-doc-links li {
+  margin-bottom: 10px;
+}
+
+.ets-doc-links a {
+  text-decoration: none;
+  font-weight: bold;
+}
