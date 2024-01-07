@@ -27,7 +27,7 @@ Add the following to wp-config.php for default blocking:
 define( 'inspect_http_requests_default_block', true );
 </pre>
 
-To prevent database littering and sql lookups you can ignore (parts of) hostnames: 
+To prevent database littering and performance drain due to sql lookups you can ignore (parts of) hostnames: 
 (without this, your own site and wordpress.org are ignored)
 <pre>
 define( 'inspect_http_requests_ignored_urls', [
@@ -69,7 +69,7 @@ define( 'inspect_http_requests_ignored_urls', [
 = 1.0.6 =
 * Support Wordpress 6.4.2
 * Sort the admin page on blocked url's and sort URL's on alphabet
-* Stop logging to database if administrator has manually added a matching base-url.
+* Stop logging to database if administrator has manually added a matching base-url in the database.
 * Added option to block by default, define( 'inspect-http-requests-default-block', true ) in wp-config.php
 * Added option to create ignore list in wp-config.php, the defaults are 'your own wp' and wordpress.org
   so that preloaders and updates won't show up. If you have a lot of database lookups this WILL speed things up.
